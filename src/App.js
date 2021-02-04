@@ -25,7 +25,7 @@ import './App.css'
 
 
 
-//  //  //  FUNCTION    //  //  //
+//  //  //  FUNCTIONS    //  //  //
 
 export default function App() {
 
@@ -76,6 +76,14 @@ export default function App() {
 
   const [showMenu, toggleShowMenu] = useState()
   const [showPiece, toggleShowPiece] = useState()
+
+  const useMenu = () => {
+        
+  }
+
+  const usePiece = () => {
+        
+  }
 
 
 
