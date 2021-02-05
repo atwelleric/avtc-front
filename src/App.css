@@ -4,15 +4,20 @@ body {
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   background-color: #000000;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  /* min-height: 100vh; */
+  /* display: flex; */
+  /* flex-direction: column; */
   /* align-items: center; */
-  justify-content: center;
+  /* justify-content: center; */
   color: rgb(255, 255, 255);
 }
 
-.links {
+Link {
+	color: inherit;
+	text-decoration: none;
+}
+
+a {
 	color: inherit;
 	text-decoration: none;
 }

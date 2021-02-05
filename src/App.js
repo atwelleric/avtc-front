@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo, useContext } from 'react'
 import { Route, Switch } from 'react-router-dom'
+import { Frame, Scroll, useCycle } from 'framer'
 
 
 //  //  //  COMPONENTS    //  //  //
@@ -10,6 +11,7 @@ import ArtistProfile from './components/ArtistProfile'
 import Gallery from './components/Gallery'
 import Home from './components/Home'
 import MenuModal from './components/MenuModal'
+import Nav from './components/Nav'
 import PieceModal from './components/PieceModal'
 
 
@@ -37,29 +39,29 @@ export default function App() {
   const [artists, setArtists] = useState([]);
   const [gallery, setGallery] = useState([]);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
-  const fetchData = async () => {
+  // const fetchData = async () => {
     
 
-    const artistsData = await fetch(`${DBURL}/artists`)
-    const artists = await artistsData.json();
-    setArtists(artists)
-    // console.log(artists)
+  //   const artistsData = await fetch(`${DBURL}/artists`)
+  //   const artists = await artistsData.json();
+  //   setArtists(artists)
+  //   // console.log(artists)
 
 
-    // check actual results of the following function
-    let gallery = [];
-    artists.map((artist) => {
-      gallery.push(artist.gallery) {/* check actual addresses with database composition */}
-      setGallery(gallery);
-    })
-    // console.log(gallery
+  //   // check actual results of the following function
+  //   let gallery = [];
+  //   artists.map((artist) => {
+  //     gallery.push(artist.gallery) {/* check actual addresses with database composition */}
+  //     setGallery(gallery);
+  //   })
+  //   // console.log(gallery
     
 
-  }
+  // }
 
   
   
@@ -77,13 +79,14 @@ export default function App() {
   const [showMenu, toggleShowMenu] = useState()
   const [showPiece, toggleShowPiece] = useState()
 
-  const useMenu = () => {
-        
-  }
+  // const useMenu = () => {
+  //   const [isShowing, setIsShowing] = useCycle(false, true)
 
-  const usePiece = () => {
-        
-  }
+  //   funstion
+  // }
+
+  // const usePiece = () => {
+  // }
 
 
 
@@ -94,11 +97,12 @@ export default function App() {
     <div className="App">
       <MenuModal showMenu={showMenu} hide={toggleShowMenu} />
       <PieceModal showPiece={showPiece} hide={toggleShowPiece} />
+      <Nav />
       <Switch>
         {/* <avtcContext.Provider value={ providerArtists, ProviderGallery }> */}
-          <Route exact path='/:artistId' component={ArtistProfile} />
-          <Route exact path='/gallery' component={Gallery} />
           <Route exact path='/' component={Home} />
+          <Route exact path='/gallery' component={Gallery} />
+          <Route exact path='/:artistId' component={ArtistProfile} />
         {/* </avtcContext.Provider> */}
       </Switch>
     </div>
