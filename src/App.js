@@ -1,8 +1,8 @@
 //  //  //  FUNCTIONALITY   //  //  //
 
-import { useState, useEffect, useMemo, useContext } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { Frame, Scroll, useCycle } from 'framer'
+// import { Frame, Scroll, useCycle } from 'framer'
 
 
 //  //  //  COMPONENTS    //  //  //
@@ -17,12 +17,15 @@ import PieceModal from './components/PieceModal'
 
 //  //  //  VARIABLES   //  //  //
 
-import { DBURL } from './config'
+import { avtcContext } from './helperFunctions/avtcContext'
+import { DBURL } from './helperFunctions/config'
 
 
 //  //  //  STYLE SHEETS    //  //  //
 
 import './App.css'
+
+
 
 
 
@@ -37,46 +40,42 @@ export default function App() {
   //  //  //  DATA FETCHING FROM DB   //  //  //
 
   const [artists, setArtists] = useState([]);
-  const [gallery, setGallery] = useState([]);
+  const [gallery, setGallery] = useState([]); 
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
 
-  // const fetchData = async () => {
+  useEffect(() => { fetchData() }, []);
+
+
+  const fetchData = async () => {
     
+    const artistsData = await fetch(`${DBURL}/characters`)
+    const artists = await artistsData.json();
+    setArtists(artists)
+    // console.log(artists)
 
-  //   const artistsData = await fetch(`${DBURL}/artists`)
-  //   const artists = await artistsData.json();
-  //   setArtists(artists)
-  //   // console.log(artists)
-
-
-  //   // check actual results of the following function
-  //   let gallery = [];
-  //   artists.map((artist) => {
-  //     gallery.push(artist.gallery) {/* check actual addresses with database composition */}
-  //     setGallery(gallery);
-  //   })
-  //   // console.log(gallery
+    const gallery = [];
+    artists.map((artist) => {
+      gallery.push(artist.img)
+    })
+    setGallery(gallery);
+    // console.log(gallery)
     
-
-  // }
+  }
 
   
   
   
   //  //  //  DATA SORTING FOR APP MEMORY   //  //  //
 
-  const providerArtists = useMemo(() => ({ artists, setArtists }), [artists, setArtists])
-  const providerGallery = useMemo(() => ({ gallery, setGallery }), [gallery, setGallery])
+  // const providerArtists = useMemo(() => ({ artists, setArtists }), [artists, setArtists])
+  // const providerGallery = useMemo(() => ({ gallery, setGallery }), [gallery, setGallery])
 
 
 
 
   //  //  //  MODAL TOGGLING    //  //  //
 
-  const [showMenu, toggleShowMenu] = useState()
+
   const [showPiece, toggleShowPiece] = useState()
 
   // const useMenu = () => {
@@ -95,16 +94,16 @@ export default function App() {
 
   return (
     <div className="App">
-      <MenuModal showMenu={showMenu} hide={toggleShowMenu} />
-      <PieceModal showPiece={showPiece} hide={toggleShowPiece} />
-      <Nav />
-      <Switch>
-        {/* <avtcContext.Provider value={ providerArtists, ProviderGallery }> */}
-          <Route exact path='/' component={Home} />
-          <Route exact path='/gallery' component={Gallery} />
-          <Route exact path='/:artistId' component={ArtistProfile} />
-        {/* </avtcContext.Provider> */}
-      </Switch>
+        <Nav />
+        <MenuModal />
+        {/* <PieceModal showPiece={showPiece} hide={toggleShowPiece} /> */}
+        <Switch>
+            <Route exact path='/' component={Home} />
+            <avtcContext.Provider value={ artists }>
+              <Route exact path='/gallery' component={Gallery} />
+            </avtcContext.Provider>
+            <Route exact path='/:artistId' component={ArtistProfile} />
+        </Switch>
     </div>
   )
 }

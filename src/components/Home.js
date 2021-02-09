@@ -1,9 +1,13 @@
+import '../comp-css/home.css'
+
 export default function Home() {
     return (
         <>
-            <h1>SPECIALTY<br/>AMERICAN TRADITIONAL<br/>TATTOO SHOP</h1>
-            <section>
-                <h1 id='services'>WHAT WE DO</h1>
+            <section id='homeHeader' className='home-page-sections'>
+                <h1>SPECIALTY<br/>AMERICAN TRADITIONAL<br/>TATTOO SHOP</h1>
+            </section>
+            <section id='services' className='home-page-sections'>
+                <h1 id='servicesTitle'>WHAT WE DO</h1>
                 <ul id='servicesList'>
                     <li>
                         <img alt='tattooIcon' id='tattooIcon' className='servicesIcons'/>
@@ -23,7 +27,7 @@ export default function Home() {
                     </li>
                 </ul>
             </section>
-            <section id='galleryPeek'>
+            <section id='galleryPeek' className='home-page-sections'>
                 <h1 id='galleryPeekTitle'>OUR WORK</h1>
                 <div id='galleryPeekGrid'>
                     <div id='linkToGalleryPage'>
@@ -40,7 +44,7 @@ export default function Home() {
                     <img alt='imgName' id='' className=''/>
                 </div>
             </section>
-            <section id='artistCards'>
+            <section id='artistCards' className='home-page-sections'>
                 <h1 id='artistCardsTitle'>RESIDENT ARTISTS</h1>
                 <ul id='artistCardsList'>
                     <li>
@@ -58,7 +62,7 @@ export default function Home() {
                     </li>
                 </ul>
             </section>
-            <section id='merchandisePeek'>
+            <section id='merchandisePeek' className='home-page-sections'>
                 <h1 id='merchandisePeekTitle'>MERCHANDISE</h1>
                 <div id='merchandisePeekGrid'>
                     <div id='linkToMerchandisePage'>
@@ -67,7 +71,7 @@ export default function Home() {
                     <img alt='imgName' id='merchandisePeekImg' className='merchandise-peek-img'/>
                 </div>
             </section>
-            <section id='contactUs'>
+            <section id='contactUs' className='home-page-sections'>
                 <h1 id='contactUsTitle'>CONTACT US</h1>
                 <div id='contactUsSocialMedia'>
                     <h5 className='social-media-title'>Social Media</h5>
