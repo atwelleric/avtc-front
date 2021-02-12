@@ -11,8 +11,6 @@ body {
   /* justify-content: center; */
   color: rgb(255, 255, 255);
   font-family: 'New Rocker';
-  max-width: 1500px;
-  margin: auto;
 }
 
 h1 {
@@ -30,11 +28,15 @@ button:focus {
 
 button:hover,
 button:focus {
-    background: rgba(255, 198, 75, 0.705);
+    background: rgba(255, 198, 75, 0);
+    transition: transform .1s ease-in-out;
+    transform: scale(1.1);
 }
 
 button:focus {
     outline: none;
+    transition: transform .1s ease-in-out;
+    transform: scale(1.1);
 }
 
 button:active {
