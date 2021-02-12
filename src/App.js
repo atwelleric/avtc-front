@@ -1,8 +1,9 @@
 //  //  //  FUNCTIONALITY   //  //  //
 
-import { useState, useEffect, useMemo, useContext } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { Frame, Scroll, useCycle } from 'framer'
+// import { Frame, Scroll, useCycle } from 'framer'
+import styled from 'styled-components'
 
 
 //  //  //  COMPONENTS    //  //  //
@@ -10,14 +11,14 @@ import { Frame, Scroll, useCycle } from 'framer'
 import ArtistProfile from './components/ArtistProfile'
 import Gallery from './components/Gallery'
 import Home from './components/Home'
-import MenuModal from './components/MenuModal'
 import Nav from './components/Nav'
 import PieceModal from './components/PieceModal'
 
 
 //  //  //  VARIABLES   //  //  //
 
-import { DBURL } from './config'
+import { avtcContext } from './helperFunctions/avtcContext'
+import { DBURL } from './helperFunctions/config'
 
 
 //  //  //  STYLE SHEETS    //  //  //
@@ -25,6 +26,21 @@ import { DBURL } from './config'
 import './App.css'
 
 
+//  //  //  STYLED-COMPONENTS   //  //  //
+
+const Body = styled.div`margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  background-color: #000000;
+  /* min-height: 100vh; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  color: rgb(255, 255, 255);
+  font-family: 'New Rocker';
+`
 
 
 //  //  //  FUNCTIONS    //  //  //
@@ -32,78 +48,59 @@ import './App.css'
 export default function App() {
 
 
-
-  
   //  //  //  DATA FETCHING FROM DB   //  //  //
 
   const [artists, setArtists] = useState([]);
-  const [gallery, setGallery] = useState([]);
+  const [gallery, setGallery] = useState([]); 
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
 
-  // const fetchData = async () => {
+  useEffect(() => { fetchData() }, []);
+
+
+  const fetchData = async () => {
     
+    const artistsData = await fetch(`${DBURL}/characters`)
+    const artists = await artistsData.json();
+    setArtists(artists)
+    // console.log(artists)
 
-  //   const artistsData = await fetch(`${DBURL}/artists`)
-  //   const artists = await artistsData.json();
-  //   setArtists(artists)
-  //   // console.log(artists)
-
-
-  //   // check actual results of the following function
-  //   let gallery = [];
-  //   artists.map((artist) => {
-  //     gallery.push(artist.gallery) {/* check actual addresses with database composition */}
-  //     setGallery(gallery);
-  //   })
-  //   // console.log(gallery
+    const gallery = [];
+    artists.map((artist) => {
+      gallery.push(artist.img)
+    })
+    setGallery(gallery);
+    // console.log(gallery)
     
+  }
 
-  // }
-
-  
-  
   
   //  //  //  DATA SORTING FOR APP MEMORY   //  //  //
 
-  const providerArtists = useMemo(() => ({ artists, setArtists }), [artists, setArtists])
-  const providerGallery = useMemo(() => ({ gallery, setGallery }), [gallery, setGallery])
+  // const providerArtists = useMemo(() => ({ artists, setArtists }), [artists, setArtists])
+  // const providerGallery = useMemo(() => ({ gallery, setGallery }), [gallery, setGallery])
 
 
+  //  //  //  PIECEMODAL TOGGLING    //  //  //
 
+  const [showPiece, setShowPiece] = useState(false)
 
-  //  //  //  MODAL TOGGLING    //  //  //
-
-  const [showMenu, toggleShowMenu] = useState()
-  const [showPiece, toggleShowPiece] = useState()
-
-  // const useMenu = () => {
-  //   const [isShowing, setIsShowing] = useCycle(false, true)
-
-  //   funstion
-  // }
-
-  // const usePiece = () => {
-  // }
-
-
+  const openPiece = () => {
+    setShowPiece(prev => !prev)
+  }
 
 
   //  //  //  RENDER    //  //  //
 
   return (
     <div className="App">
-      <MenuModal showMenu={showMenu} hide={toggleShowMenu} />
-      <PieceModal showPiece={showPiece} hide={toggleShowPiece} />
       <Nav />
+      <PieceModal showPiece={showPiece} setShowPiece={setShowPiece} />
       <Switch>
-        {/* <avtcContext.Provider value={ providerArtists, ProviderGallery }> */}
           <Route exact path='/' component={Home} />
-          <Route exact path='/gallery' component={Gallery} />
+          <avtcContext.Provider value={ artists }>
+            <Route exact path='/gallery' component={Gallery} />
+          </avtcContext.Provider>
           <Route exact path='/:artistId' component={ArtistProfile} />
-        {/* </avtcContext.Provider> */}
       </Switch>
     </div>
   )

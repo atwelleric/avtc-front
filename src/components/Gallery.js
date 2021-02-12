@@ -1,5 +1,16 @@
+import { useContext } from 'react'
+import { avtcContext } from '../helperFunctions/avtcContext'
+
 export default function Gallery() {
+    // const artists = useContext(avtcContext) 
+
     return (
-        <h1>Gallery</h1>
+        <div>
+            <h1>GALLERY</h1>
+            {/* <div className=''>
+                {artists.}
+            </div> */}
+        </div>
+
     )
 }
