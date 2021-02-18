@@ -1,9 +1,10 @@
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
 
 
 //  //  //  STYLED-COMPONENTS   //  //  //
 
-const Container = styled.div`
+const Container = styled(motion.div)`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,7 +17,7 @@ const Container = styled.div`
     backdrop-filter: blur(15px);
 `
 
-const UL = styled.ul`
+const UL = styled(motion.ul)`
     margin-block-start: 0;
     margin-block-end: 0;
     list-style: none;
@@ -24,7 +25,7 @@ const UL = styled.ul`
     text-align: center;
 `
 
-const LI = styled.ul`
+const LI = styled(motion.li)`
     margin-inline-start: 0;
     margin-inline-end: 0;
     padding-inline-start: 0;
@@ -41,7 +42,7 @@ const A = styled.a`
 
 //  //  //  COMPONENT   //  //  //
 
-export default function MenuModal({ showMenu, setShowMenu }) {
+export default function MenuModal({ showMenu, setShowMenu, toggleMenu }) {
     return (
         <>
             {showMenu ? 
