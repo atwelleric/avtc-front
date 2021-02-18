@@ -84,7 +84,7 @@ export default function App() {
 
   const [showPiece, setShowPiece] = useState(false)
 
-  const openPiece = () => {
+  const togglePieceView = () => {
     setShowPiece(prev => !prev)
   }
 
