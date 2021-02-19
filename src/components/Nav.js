@@ -12,11 +12,6 @@ import { motion } from 'framer-motion'
 import MenuModal from './MenuModal'
 
 
-//  //  //  STYLE SHEETS    //  //  //
-
-// import '../comp-css/nav.css'
-
-
 //  //  //  IMAGES  //  //  //
 
 import menu from '../images/+.png'
@@ -114,11 +109,6 @@ const AVTCImg = styled.img`
     -moz-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out;
-`
-
-const A = styled.a`
-color: inherit;
-text-decoration: none;
 `
 
 
