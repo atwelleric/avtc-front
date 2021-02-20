@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
 
@@ -31,37 +32,115 @@ const LI = styled(motion.li)`
     padding-inline-start: 0;
 	color: inherit;
 	text-decoration: none;
-    /* margin: 0 auto; */
+
+    padding: 3vmin;
 `
 
 const A = styled.a`
 	color: inherit;
 	text-decoration: none;
+
+    font-size: 18px;
+    letter-spacing: 0.105em;
+    color: rgba(255, 255, 255, .75);
+    
+    /* -webkit-text-fill-color: #000000;
+    -webkit-text-stroke-color: rgba(255, 255, 255, 1);
+    -webkit-text-stroke-width: 1px; */
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, .5);
+
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
 `
 
 
 //  //  //  COMPONENT   //  //  //
 
 export default function MenuModal({ showMenu, setShowMenu, toggleMenu }) {
+
+    const [focusHome, setFocusHome] = useState(false)
+    const [focusGallery, setFocusGallery] = useState(false)
+    const [focusResidentArtists, setFocusResidentArtists] = useState(false)
+    const [focusMerchandise, setFocusMerchandise] = useState(false)
+    const [focusContactUs, setFocusContactUs] = useState(false)
+
+
     return (
         <>
             {showMenu ? 
                 <Container>
                     <UL className='menu-links'>
-                        <LI className='links'>
-                            <A href='/'>HOME</A>
+                        <LI className='links'
+                            onMouseEnter={() => setFocusHome(true)}
+                            onMouseLeave={() => setFocusHome(false)}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            transition={{ duration: 0.1 }}
+                            // onClick={() => setFocusHome(false)}
+                            >
+                            {focusHome ?
+                                <><A href='/'><span> - </span>HOME<span> - </span></A></>
+                                : <A href='/'>HOME</A>
+                            }
+                            {/* <A href='/'>HOME</A> */}
                         </LI>
-                        <LI className='links'>
-                            <A className='' href='/gallery'>GALLERY</A>
+                        <LI className='links'
+                            onMouseEnter={() => setFocusGallery(true)}
+                            onMouseLeave={() => setFocusGallery(false)}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            transition={{ duration: 0.1 }}
+                            onClick={() => showMenu ? toggleMenu() : null}
+                            >
+                            {focusGallery ?
+                                <><A href='/gallery'><span> - </span>GALLERY<span> - </span></A></>
+                                : <A href='/gallery'>GALLERY</A>
+                            }
+                            {/* <A href='/gallery'>GALLERY</A> */}
                         </LI>
-                        <LI className='links'>
-                            <A href='/#artistCards'>RESIDENT ARTISTS</A>
+                        <LI className='links'
+                            onMouseEnter={() => setFocusResidentArtists(true)}
+                            onMouseLeave={() => setFocusResidentArtists(false)}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            transition={{ duration: 0.1 }}
+                            onClick={() => showMenu ? toggleMenu() : null}
+                            >
+                            {focusResidentArtists ?
+                                <><A href='/#artistCards'><span> - </span>RESIDENT ARTISTS<span> - </span></A></>
+                                : <A href='/#artistCards'>RESIDENT ARTISTS</A>
+                            }
+                            {/* <A href='/#artistCards'>RESIDENT ARTISTS</A> */}
                         </LI>
-                        <LI className='links'>
-                            <A href='/#merchandisePeek'>MERCHANDISE</A>
+                        <LI className='links'
+                            onMouseEnter={() => setFocusMerchandise(true)}
+                            onMouseLeave={() => setFocusMerchandise(false)}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            transition={{ duration: 0.1 }}
+                            onClick={() => showMenu ? toggleMenu() : null}
+                            >
+                            {focusMerchandise ?
+                                <><A href='/#merchandisePeek'><span> - </span>MERCHANDISE<span> - </span></A></>
+                                : <A href='/#merchandisePeek'>MERCHANDISE</A>
+                            }
+                            {/* <A href='/#merchandisePeek'>MERCHANDISE</A> */}
                         </LI>
-                        <LI className='links'>
-                            <A href='/#contactUs'>CONTACT US</A>
+                        <LI className='links'
+                            onMouseEnter={() => setFocusContactUs(true)}
+                            onMouseLeave={() => setFocusContactUs(false)}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            transition={{ duration: 0.1 }}
+                            onClick={() => showMenu ? toggleMenu() : null}
+                            >
+                            {focusContactUs ?
+                                <><A href='/#contactUs'><span> - </span>CONTACT US<span> - </span></A></>
+                                : <A href='/#contactUs'>CONTACT US</A>
+                            }
+                            {/* <A href='/#contactUs'>CONTACT US</A> */}
                         </LI>
                     </UL>
                 </Container>
