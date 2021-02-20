@@ -20,7 +20,7 @@ import AVTC from '../images/AVTC.png'
 
 //  //  //  STYLED-COMPONENTS   //  //  //
 
-const Header = styled.header`
+const Nav = styled.header`
     width: 100vw;
     position: fixed;
     top: 0;
@@ -30,7 +30,7 @@ const Header = styled.header`
     align-items: center;
 `
 
-const HeaderContent = styled.div`
+const NavContent = styled.div`
     width: 100vw;
     max-width: 1500px;
     position: fixed;
@@ -87,8 +87,8 @@ const MenuImg = styled.img`
     max-width: 36px;
     height: auto;
     
-    -webkit-filter: drop-shadow(5px 5px 5px #222);
-    filter: drop-shadow(5px 5px 5px #222);
+    -webkit-filter: drop-shadow(0px 2px 2px #000000);
+    filter: drop-shadow(0px 2px 2px #000000);
 
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
@@ -102,39 +102,37 @@ const AVTCImg = styled.img`
     max-width: 75px;
     height: auto;
     
-    -webkit-filter: drop-shadow(5px 5px 5px #222);
-    filter: drop-shadow(5px 5px 5px #222);
+    -webkit-filter: drop-shadow(0px 2px 2px #000000);
+    filter: drop-shadow(0px 2px 2px #000000);
 
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out; 
 `
-
 
 
 //  //  //  COMPONENT   //  //  //
 
-export default function Nav() {
+export default function NavBar() {
 
     const [showMenu, setShowMenu] = useState(false)
 
+    const toggleMenu = () => {
+        setShowMenu(!showMenu)
+        cycle()
+    }
+    
     const [animate, cycle] = useCycle(
         {rotate: 0},
         {rotate: 45}
     )
 
-    const toggleMenu = () => {
-        setShowMenu(prev => !prev)
-        cycle()
-    }
-
-
     
     return (
         <>
-            <Header>
-                <HeaderContent>
+            <Nav>
+                <NavContent>
                     <MenuButton id='menuToggleButton' class="btn" role="button" aria-pressed="false" tabindex="0"
                         whileHover={{ scale: 1.2 }}
                         whileTap={{ scale: 0.9 }}
@@ -154,8 +152,8 @@ export default function Nav() {
                             <AVTCImg id='avtcImage' src={AVTC} alt="AVTC"/>
                         </Link>
                     </AVTCButton>
-                </HeaderContent>
-            </Header>
+                </NavContent>
+            </Nav>
             <MenuModal showMenu={showMenu} setShowMenu={setShowMenu} toggleMenu={toggleMenu}/>
         </>
     )
