@@ -1,21 +1,15 @@
-//  //  //  FUNCTIONALITY   //  //  //
-
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useCycle } from 'framer'
 import { motion } from 'framer-motion'
 
-
-//  //  //  COMPONENTS    //  //  //
-
 import MenuModal from './MenuModal'
-
-
-//  //  //  IMAGES  //  //  //
 
 import menu from '../images/+.png'
 import AVTC from '../images/AVTC.png'
+
+
 
 
 //  //  //  STYLED-COMPONENTS   //  //  //
@@ -41,7 +35,6 @@ const NavContent = styled.div`
     justify-content: space-between;
     align-items: center;
     z-index: 101;
-    
 `
 
 const MenuButton = styled(motion.div)`
@@ -133,17 +126,17 @@ export default function NavBar() {
         <>
             <Nav>
                 <NavContent>
-                    <MenuButton id='menuToggleButton' class="btn" role="button" aria-pressed="false" tabindex="0"
+                    <MenuButton id='menuToggleButton' role="button" aria-pressed="false" tabindex="0"
                         whileHover={{ scale: 1.2 }}
                         whileTap={{ scale: 0.9 }}
                         transition={{ duration: 0.2 }}
                         animate={animate} 
                         onClick={toggleMenu}>
-                        <Link>
+                        <Link to=''>
                             <MenuImg id='menuImage' src={menu} alt="menu"/>
                         </Link>
                     </MenuButton>
-                    <AVTCButton id='mainHomeButton' class="btn" role="button" aria-pressed="false" tabindex="0"
+                    <AVTCButton id='mainHomeButton' role="button" aria-pressed="false" tabindex="0"
                         whileHover={{ scale: 1.2 }}
                         whileTap={{ scale: 0.9 }}
                         transition={{ duration: 0.2 }} 

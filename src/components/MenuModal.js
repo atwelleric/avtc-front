@@ -55,6 +55,14 @@ const A = styled.a`
     transition: all 0.5s ease-in-out;
 `
 
+const rendering = {
+    hidden: {
+      opacity: 0,
+      transition: { duration: 0.5 },
+    },
+    visible: { opacity: 1 },
+}
+
 
 //  //  //  COMPONENT   //  //  //
 
@@ -77,7 +85,8 @@ export default function MenuModal({ showMenu, setShowMenu, toggleMenu }) {
                             onMouseLeave={() => setFocusHome(false)}
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
-                            transition={{ duration: 0.1 }}
+                            transition={{ duration: 0.08 }}
+                            // initial={{ scale: 0, y: 100 }} animate={{ scale: 1, y: 0, delay: 1000 }}
                             // onClick={() => setFocusHome(false)}
                             >
                             {focusHome ?
@@ -91,7 +100,7 @@ export default function MenuModal({ showMenu, setShowMenu, toggleMenu }) {
                             onMouseLeave={() => setFocusGallery(false)}
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
-                            transition={{ duration: 0.1 }}
+                            transition={{ duration: 0.08 }}
                             onClick={() => showMenu ? toggleMenu() : null}
                             >
                             {focusGallery ?
@@ -105,7 +114,7 @@ export default function MenuModal({ showMenu, setShowMenu, toggleMenu }) {
                             onMouseLeave={() => setFocusResidentArtists(false)}
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
-                            transition={{ duration: 0.1 }}
+                            transition={{ duration: 0.08 }}
                             onClick={() => showMenu ? toggleMenu() : null}
                             >
                             {focusResidentArtists ?
@@ -119,7 +128,7 @@ export default function MenuModal({ showMenu, setShowMenu, toggleMenu }) {
                             onMouseLeave={() => setFocusMerchandise(false)}
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
-                            transition={{ duration: 0.1 }}
+                            transition={{ duration: 0.08 }}
                             onClick={() => showMenu ? toggleMenu() : null}
                             >
                             {focusMerchandise ?
@@ -133,7 +142,7 @@ export default function MenuModal({ showMenu, setShowMenu, toggleMenu }) {
                             onMouseLeave={() => setFocusContactUs(false)}
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
-                            transition={{ duration: 0.1 }}
+                            transition={{ duration: 0.08 }}
                             onClick={() => showMenu ? toggleMenu() : null}
                             >
                             {focusContactUs ?
