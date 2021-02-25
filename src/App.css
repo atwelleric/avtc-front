@@ -9,6 +9,7 @@ body {
   /* flex-direction: column; */
   /* align-items: center; */
   /* justify-content: center; */
+  color: rgba(255, 228, 140, 0.521);
   color: rgb(255, 255, 255);
   font-family: 'New Rocker';
 	margin: 0 auto;
@@ -59,6 +60,6 @@ button:active {
 	text-decoration: none;
 } */
 
-link:hover, link:focus {
+/* link:hover, link:focus {
   outline: none;
-}
+} */
