@@ -111,23 +111,38 @@ const AVTCImg = styled.img`
 
 export default function NavBar() {
 
-    //  //  //  MENU TOGGLE //  //  //
+
+    //  //  //  MENU TOGGLE THROUGH MENU BUTTON //  //  //
 
     const [showMenu, setShowMenu] = useState(false)
-
-    const toggleMenu = () => {
-        setShowMenu(!showMenu)
-        cycle()
-    }
     
     const [animate, cycle] = useCycle(
         {rotate: 0},
         {rotate: 45}
     )
 
+    const toggleMenu = () => {
+        setShowMenu(!showMenu)
+        cycle()
+    }
+    
+
     //  //  //  PIECE SETTINGS  //  //  //
 
     const { showPiece, setShowPiece } = useContext(PieceModalToggleContext)
+
+    const closeModals = () => {
+        if (showPiece && showMenu) {
+            setShowPiece(!showPiece)
+            setShowMenu(!showMenu)
+            cycle()
+        } else if (showPiece) {
+            setShowPiece(!showPiece)
+        } else if (showMenu) {
+            setShowMenu(!showMenu)
+            cycle()
+        }
+    }
 
 
 
@@ -152,7 +167,7 @@ export default function NavBar() {
                         whileHover={{ scale: 1.2 }}
                         whileTap={{ scale: 0.9 }}
                         transition={{ duration: 0.2 }} 
-                        onClick={() => showMenu ? toggleMenu() : null}
+                        onClick={closeModals}
                         >
                         <Link className='links' to='/'>
                             <AVTCImg id='avtcImage' src={AVTC} alt="AVTC"/>
@@ -160,7 +175,13 @@ export default function NavBar() {
                     </AVTCButton>
                 </NavContent>
             </Nav>
-            <MenuModal showMenu={showMenu} setShowMenu={setShowMenu} toggleMenu={toggleMenu}/>
+            <MenuModal 
+                showMenu={showMenu}
+                setShowMenu={setShowMenu}
+                showPiece={showPiece}
+                setShowPiece={setShowPiece}
+                closeModals={closeModals}
+                />
             <PieceModal />
         </>
     )
