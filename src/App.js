@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useContext, useMemo } from 'react'
 import { Route, Switch } from 'react-router-dom'
 // import { Frame, Scroll, useCycle } from 'framer'
 import { motion } from 'framer-motion'
@@ -10,7 +10,7 @@ import Home from './components/Home'
 import NavBar from './components/NavBar'
 import PieceModal from './components/PieceModal'
 
-import { avtcContext } from './helperFunctions/avtcContext'
+import { PieceContext, PieceModalToggleContext } from './helperFunctions/avtcContext'
 import { DBURL } from './helperFunctions/config'
 
 import main_bg_img from './images/BGImg.png'
@@ -62,6 +62,7 @@ const MainBGImg = styled(motion.img)`
   overflow: hidden;
   left: 50%;
   top: 0%;
+  -webkit-filter: blur(6px) brightness(40%) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) opacity(69%);
   filter: blur(6px) brightness(40%) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) opacity(69%);
 `
 
@@ -78,96 +79,53 @@ const BottomBGImg = styled(motion.img)`
   /* overflow: hidden; */
   left: 50%;
   bottom: 0%;
+
+  -webkit-filter: drop-shadow(0px 2px 2px #000000);
+    filter: drop-shadow(0px 2px 2px #000000);
 `
 
 
 
-//  //  //  FUNCTIONS    //  //  //
+//  //  //  COMPONENT    //  //  //
 
 export default function App() {
 
 
   //  //  //  DATA FETCHING FROM DB   //  //  //
 
-  useEffect(() => {fetchData()}, []);
+  // useEffect(() => {fetchData()}, []);
 
-  const [artists, setArtists] = useState([]); 
-  // const [gallery, setGallery] = useState([]);
+  // const [ artists, setArtists ] = useState([]); 
+  // const [ gallery, setGallery ] = useState([]);
 
-  const fetchData = async () => {
+  // const fetchData = async () => {
     
-    const charData = await fetch(`${DBURL}/characters`)
-    const char = await charData.json();
-    setArtists(char)
-    // console.log(artists[0].name)
+  //   const charData = await fetch(`${DBURL}/characters`)
+  //   const char = await charData.json();
+  //   setArtists(char)
 
-    // const gallery = [];
-    // artists.map((artist) => {
-    //   gallery.push(artist.img)
-    // })
-    // setGallery(gallery);
-    // console.log(gallery)
+  //   const imgs = [];
+  //   artists.map((artist) => {
+  //     imgs.push(artist.img)
+  //   })
+  //   setGallery(imgs);
+
+  //   // console.log(artists)
+  //   // console.log(gallery)
     
-  }
-
-  // useEffect(() => {
-	// 	console.log(artists[0].name);
-	// }, []);
+  // }
 
 
+  //  //  //  PIECE MASTER SETTINGS  //  //  //
 
-  
-  //  //  //  DATA SORTING FOR APP MEMORY   //  //  //
+  const [ piece, setPiece ] = useState('wazzap')
+  const providerPiece = useMemo (() =>  ({ piece, setPiece }), [ piece, setPiece ])
 
-  // const providerArtists = useMemo(() => ({ artists, setArtists }), [artists, setArtists])
-  // const providerGallery = useMemo(() => ({ gallery, setGallery }), [gallery, setGallery])
-
-
-  //  //  //  PIECEMODAL TOGGLING    //  //  //
-
-  const [showPiece, setShowPiece] = useState(false)
-
-  const togglePieceView = () => {
-    setShowPiece(prev => !prev)
-  }
-
-
-  //  //  //  TESTING VALUE CHANGES PASSED THROUGH CONTEXT  //  //  //
-
-  // const msg = 'hello from App.js'
-
-  // const [state, setState] = useState({
-  //   a: undefined,
-  //   b: "b",
-  //   index: 0
-  // });
-
-  // setTimeout(() => {
-  //   const { index } = state;
-  //   if (index % 2 === 0) {
-  //     setState({ ...state, index: index + 1, a: `a${index}`, b: `b${index}` });
-  //   } else {
-  //     setState({ ...state, index: index + 1, a: `a${index}` });
-  //   }
-  // }, 1000);
-
-  // // const [artists, setArtists] = useState([]);
-
-  //   useEffect(() => {
-  //       //When a changes we need to execute
-  //       //specific logic for a and other vars of the state.
-  //       //Which is not described here and that's the reason
-  //       //why we need 2 different useEffects
-  //       setArtists(artists => (artists));
-  //       // console.log(artists[0].name)
-  //     }, [artists]);
+  const [ showPiece, setShowPiece ] = useState(false)
+  const providerShowPiece = useMemo (() =>  ({ showPiece, setShowPiece }), [ showPiece, setShowPiece ])
 
   
 
-
-  const [msg, setMsg] = useState('hello from context')
-
-  const msgValue = useMemo(() => ({ msg, setMsg }), [msg, setMsg])
 
 
 
@@ -175,26 +133,22 @@ export default function App() {
 
   return (
     <div className="App">
-      <NavBar />
-      {/* <h1>{artists[0].name}</h1> */}
-      <PieceModal showPiece={showPiece} setShowPiece={setShowPiece} />
-      <MainBGImg 
-        src={main_bg_img}
-        // src={artists[0].img}
-        />
-      <Switch>
-        <avtcContext.Provider 
-          // value={artists[0].name} 
-          // value={state.artists[0].name}
-          // value={{ msg, setMsg }}
-          value={{ artists }}
-          >
-          <Route exact path='/' component={Home} artists={artists} />
-          <Route exact path='/gallery' component={Gallery} />
-          <Route exact path='/:artistId' component={ArtistProfile} />
-        </avtcContext.Provider>
-      </Switch>
-      <BottomBGImg src={bottom_bg_img}/>
+
+      <PieceContext.Provider value={ providerPiece }>
+        <PieceModalToggleContext.Provider value={ providerShowPiece }>
+
+        	<NavBar />
+        	<Switch>
+        	    <Route exact path='/' component={Home} />
+        	    <Route exact path='/gallery' component={Gallery} />
+        	    <Route exact path='/:artistSlug' component={ArtistProfile} />
+        	</Switch>
+
+        </PieceModalToggleContext.Provider>
+      </PieceContext.Provider>
+
+      <MainBGImg src={main_bg_img} />
+      <BottomBGImg src={bottom_bg_img} />
     </div>
   )
 }

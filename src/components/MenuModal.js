@@ -55,14 +55,6 @@ const A = styled.a`
     transition: all 0.5s ease-in-out;
 `
 
-const rendering = {
-    hidden: {
-      opacity: 0,
-      transition: { duration: 0.5 },
-    },
-    visible: { opacity: 1 },
-}
-
 
 //  //  //  COMPONENT   //  //  //
 
@@ -86,14 +78,11 @@ export default function MenuModal({ showMenu, setShowMenu, toggleMenu }) {
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                             transition={{ duration: 0.08 }}
-                            // initial={{ scale: 0, y: 100 }} animate={{ scale: 1, y: 0, delay: 1000 }}
-                            // onClick={() => setFocusHome(false)}
                             >
                             {focusHome ?
                                 <><A href='/'><span> - </span>HOME<span> - </span></A></>
                                 : <A href='/'>HOME</A>
                             }
-                            {/* <A href='/'>HOME</A> */}
                         </LI>
                         <LI className='links'
                             onMouseEnter={() => setFocusGallery(true)}
@@ -107,7 +96,6 @@ export default function MenuModal({ showMenu, setShowMenu, toggleMenu }) {
                                 <><A href='/gallery'><span> - </span>GALLERY<span> - </span></A></>
                                 : <A href='/gallery'>GALLERY</A>
                             }
-                            {/* <A href='/gallery'>GALLERY</A> */}
                         </LI>
                         <LI className='links'
                             onMouseEnter={() => setFocusResidentArtists(true)}
@@ -121,7 +109,6 @@ export default function MenuModal({ showMenu, setShowMenu, toggleMenu }) {
                                 <><A href='/#artistCards'><span> - </span>RESIDENT ARTISTS<span> - </span></A></>
                                 : <A href='/#artistCards'>RESIDENT ARTISTS</A>
                             }
-                            {/* <A href='/#artistCards'>RESIDENT ARTISTS</A> */}
                         </LI>
                         <LI className='links'
                             onMouseEnter={() => setFocusMerchandise(true)}
@@ -135,7 +122,6 @@ export default function MenuModal({ showMenu, setShowMenu, toggleMenu }) {
                                 <><A href='/#merchandisePeek'><span> - </span>MERCHANDISE<span> - </span></A></>
                                 : <A href='/#merchandisePeek'>MERCHANDISE</A>
                             }
-                            {/* <A href='/#merchandisePeek'>MERCHANDISE</A> */}
                         </LI>
                         <LI className='links'
                             onMouseEnter={() => setFocusContactUs(true)}
@@ -149,7 +135,6 @@ export default function MenuModal({ showMenu, setShowMenu, toggleMenu }) {
                                 <><A href='/#contactUs'><span> - </span>CONTACT US<span> - </span></A></>
                                 : <A href='/#contactUs'>CONTACT US</A>
                             }
-                            {/* <A href='/#contactUs'>CONTACT US</A> */}
                         </LI>
                     </UL>
                 </Container>
