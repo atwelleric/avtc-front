@@ -1,6 +1,9 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
+
+import { PieceModalToggleContext } from '../helperFunctions/avtcContext'
 
 
 //  //  //  STYLED-COMPONENTS   //  //  //
@@ -58,7 +61,7 @@ const A = styled.a`
 
 //  //  //  COMPONENT   //  //  //
 
-export default function MenuModal({ showMenu, setShowMenu, toggleMenu }) {
+export default function MenuModal({ showMenu, setShowMenu, showPiece, setShowPiece, closeModals }) {
 
     const [focusHome, setFocusHome] = useState(false)
     const [focusGallery, setFocusGallery] = useState(false)
@@ -90,7 +93,7 @@ export default function MenuModal({ showMenu, setShowMenu, toggleMenu }) {
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                             transition={{ duration: 0.08 }}
-                            onClick={() => showMenu ? toggleMenu() : null}
+                            onClick={closeModals}
                             >
                             {focusGallery ?
                                 <><A href='/gallery'><span> - </span>GALLERY<span> - </span></A></>
@@ -103,7 +106,7 @@ export default function MenuModal({ showMenu, setShowMenu, toggleMenu }) {
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                             transition={{ duration: 0.08 }}
-                            onClick={() => showMenu ? toggleMenu() : null}
+                            onClick={closeModals}
                             >
                             {focusResidentArtists ?
                                 <><A href='/#artistCards'><span> - </span>RESIDENT ARTISTS<span> - </span></A></>
@@ -116,7 +119,7 @@ export default function MenuModal({ showMenu, setShowMenu, toggleMenu }) {
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                             transition={{ duration: 0.08 }}
-                            onClick={() => showMenu ? toggleMenu() : null}
+                            onClick={closeModals}
                             >
                             {focusMerchandise ?
                                 <><A href='/#merchandisePeek'><span> - </span>MERCHANDISE<span> - </span></A></>
@@ -129,7 +132,7 @@ export default function MenuModal({ showMenu, setShowMenu, toggleMenu }) {
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                             transition={{ duration: 0.08 }}
-                            onClick={() => showMenu ? toggleMenu() : null}
+                            onClick={closeModals}
                             >
                             {focusContactUs ?
                                 <><A href='/#contactUs'><span> - </span>CONTACT US<span> - </span></A></>
