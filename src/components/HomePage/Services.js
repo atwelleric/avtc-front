@@ -1,5 +1,3 @@
-//  //  //  FUNCTIONALITY   //  //  //
-
 import { useState, useEffect, useContext } from 'react'
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
@@ -17,37 +15,35 @@ import iconTattooDesign from '../../images/iconTattooDesign.png'
 //  //  //  STYLED-COMPONENTS   //  //  //
 
 const Section = styled.section`
-    /* background-color: red; */
-
-    /* width: 100vw; */
-    /* height: 100vh; */
     overflow: hidden;
     padding: 0;
     margin: 3vmin;
     display: flex;
     justify-content: center;
     align-items: center;
-
-    /* max-width: 1500px; */
 `
 
 const ItemContainer = styled(motion.ul)`
-    /* width: 100vw;
-    max-width: 1500px;
-    align-items: center;
-    display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(26vmin, 1fr)); */
-
-    /* width: 10vmin; */
-    /* height: 10vmin; */
-    display: grid;
-    overflow: hidden;
-    margin: 0;
+    
     list-style: none;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    padding-inline-start: 0;
+
+    width: 100vmin;
+    /* height: 17.643vmin; */
+    /* height: 21.007vmin; */
+    /* height: 43vmin; */
+    max-width: 1000px;
+    display: grid;
     grid-template-columns: repeat(4, 1fr);
     /* grid-template-rows: repeat(2, 1fr); */
-    gap: 15px;
-    padding: 15px;
+	/* grid-template-columns: repeat(auto-fill, minmax(26vmin, 1fr)); */
+    align-items: stretch;
+    gap: 2vmin;
+    padding: 2vmin;
     background: rgba(255, 255, 255, 0.07);
     /* background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.421), rgba(50, 50, 50, 0.421), rgba(255, 255, 255, 0.171), rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.171), rgba(50, 50, 50, 0.421), rgba(0, 0, 0, 0.421), rgba(0, 0, 0, 0)); */
     /* border-radius: 30px; */
@@ -56,12 +52,18 @@ const ItemContainer = styled(motion.ul)`
 `
 
 const Item = styled(motion.li)`
-	/* display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(26vmin, 1fr)); */
+    /* height: 21.007vmin; */
+    /* background-color: pink; */
+    overflow: hidden;
+
+    display: grid;
+    justify-items: center;
+    align-items: center;
 `
 
 const Img = styled(motion.img)`
-    width: 18vmin;
+    height: 70%;
+    max-height: 14vmin;
 `
 
 const ItemTitle = styled.h1`
@@ -102,23 +104,10 @@ const ItemAnimation = {
 
 export default function Services() {
 
-    // const msg = useContext(avtcContext)
-    const {msg, setMsg} = useContext(avtcContext);
-
-    // const artists = useContext(avtcContext)
-    // console.log(JSON.stringify(artists))
-
-
-
-    
-
-
     return (
         <>
                 <div>
                 {/* <h1 id='servicesTitle'>WHAT WE DO</h1> */}
-                <h1 id='servicesTitle'>{msg}</h1> 
-                {/* <h1 id='servicesTitle'>{artists[0].name}</h1> */}
                 <Section id='services'>
                         <ItemContainer
                             variants={ItemContainerAnimation}

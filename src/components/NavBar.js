@@ -1,11 +1,13 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useCycle } from 'framer'
 import { motion } from 'framer-motion'
 
 import MenuModal from './MenuModal'
+import PieceModal from './PieceModal'
 
+import { PieceModalToggleContext } from '../helperFunctions/avtcContext'
 import menu from '../images/+.png'
 import AVTC from '../images/AVTC.png'
 
@@ -109,6 +111,8 @@ const AVTCImg = styled.img`
 
 export default function NavBar() {
 
+    //  //  //  MENU TOGGLE //  //  //
+
     const [showMenu, setShowMenu] = useState(false)
 
     const toggleMenu = () => {
@@ -121,6 +125,12 @@ export default function NavBar() {
         {rotate: 45}
     )
 
+    //  //  //  PIECE SETTINGS  //  //  //
+
+    const { showPiece, setShowPiece } = useContext(PieceModalToggleContext)
+
+
+
     
     return (
         <>
@@ -131,16 +141,19 @@ export default function NavBar() {
                         whileTap={{ scale: 0.9 }}
                         transition={{ duration: 0.2 }}
                         animate={animate} 
-                        onClick={toggleMenu}>
+                        onClick={toggleMenu}
+                        >
                         <Link to=''>
                             <MenuImg id='menuImage' src={menu} alt="menu"/>
                         </Link>
                     </MenuButton>
+                    {/* <button onClick={() => setShowPiece(!showPiece)}>{showPiece ? 'close' : 'open'}</button> */}
                     <AVTCButton id='mainHomeButton' role="button" aria-pressed="false" tabindex="0"
                         whileHover={{ scale: 1.2 }}
                         whileTap={{ scale: 0.9 }}
                         transition={{ duration: 0.2 }} 
-                        onClick={() => showMenu ? toggleMenu() : null}>
+                        onClick={() => showMenu ? toggleMenu() : null}
+                        >
                         <Link className='links' to='/'>
                             <AVTCImg id='avtcImage' src={AVTC} alt="AVTC"/>
                         </Link>
@@ -148,6 +161,7 @@ export default function NavBar() {
                 </NavContent>
             </Nav>
             <MenuModal showMenu={showMenu} setShowMenu={setShowMenu} toggleMenu={toggleMenu}/>
+            <PieceModal />
         </>
     )
 }

@@ -1,3 +1,5 @@
 import { createContext } from 'react';
 
-export const avtcContext = createContext(null);
+export const PieceContext = createContext(null);
+
+export const PieceModalToggleContext = createContext(null);
