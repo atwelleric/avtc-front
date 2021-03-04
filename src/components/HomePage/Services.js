@@ -64,10 +64,14 @@ const Item = styled(motion.li)`
 const Img = styled(motion.img)`
     height: 70%;
     max-height: 14vmin;
+
+    -webkit-filter: opacity(80%);
+    filter: opacity(80%);
 `
 
 const ItemTitle = styled.h1`
     font-size: 15px;
+    color: rgba(255, 255, 255, 0.7);
 `
 
 //  //  //  VARIABLES   //  //  //
@@ -109,22 +113,22 @@ export default function Services() {
                 <div>
                 {/* <h1 id='servicesTitle'>WHAT WE DO</h1> */}
                 <Section id='services'>
-                        <ItemContainer
-                            variants={ItemContainerAnimation}
-                            initial="hidden"
-                            animate="visible"
-                            >
-                                {services.map((i) => (
-                                <Item
-                                    key={i[0]}
-                                    variants={ItemAnimation}
-                                    whileHover={{ scale: 1.05 }}
-                                    >
-                                    <Img src={i[0]} alt='tattooIcon' id='tattooIcon'/>
-                                    <ItemTitle>{i[1]}</ItemTitle>
-                                </Item>
-                                ))}
-                        </ItemContainer>
+                    <ItemContainer
+                        variants={ItemContainerAnimation}
+                        initial="hidden"
+                        animate="visible"
+                        >
+                            {services.map((i) => (
+                            <Item
+                                key={i[0]}
+                                variants={ItemAnimation}
+                                whileHover={{ scale: 1.05 }}
+                                >
+                                <Img src={i[0]} alt='tattooIcon' id='tattooIcon'/>
+                                <ItemTitle>{i[1]}</ItemTitle>
+                            </Item>
+                            ))}
+                    </ItemContainer>
                 </Section>
             </div>
         </>

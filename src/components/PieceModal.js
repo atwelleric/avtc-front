@@ -35,8 +35,8 @@ const SubContainer = styled(motion.div)`
 `
 
 const Img = styled(motion.img)`
-    max-width: 100vmin;
-    max-height: 100vmin;
+    max-width: 70vmin;
+    max-height: 70vmin;
     overflow: hidden;
 
     border-radius: 2vmin 2vmin 0 0;
@@ -131,7 +131,7 @@ export default function PieceModal() {
                             >
                             {piece.name}
                         </PieceTitle>
-                        <Link to={`/${piece.id}`}>
+                        <Link key={piece.id} to={`/${piece.id}`}>
                             <PieceArtist
                                 variants={ItemAnimation}
                                 whileHover={{ scale: 1.05 }}
