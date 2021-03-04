@@ -75,6 +75,10 @@ const Li = styled(motion.li)`
     justify-content: center;
 `
 
+const P = styled.p`
+    color: rgba(255, 255, 255, 0.7);
+`
+
 
 //  //  //  VARIABLES   //  //  //
 
@@ -106,16 +110,16 @@ export default function GalleryPeek() {
 
     //  //  //  DATA FETCHING FROM DB   //  //  //
   
-    useEffect(() => {fetchArtists()}, []);
+    useEffect(() => {fetchGallery()}, []);
 
-    const [ artists, setArtists ] = useState([]);
+    const [ gallery, setGallery ] = useState([]);
   
-    const fetchArtists = async () => {
+    const fetchGallery = async () => {
       
-      const rtstsData = await fetch(`${DBURL}/characters`)
-      const rtsts = await rtstsData.json();
+      const gallData = await fetch(`${DBURL}/characters`)
+      const gall = await gallData.json();
 
-      setArtists(rtsts);
+      setGallery(gall);
       
     }
 
@@ -126,18 +130,18 @@ export default function GalleryPeek() {
     const { showPiece, setShowPiece } = useContext(PieceModalToggleContext)
 
   
-    const fetchArtist = async (i) => {
+    const fetchPiece = async (i) => {
       
-        const rtstData = await fetch(`${DBURL}/characters/${i}`)
-        const rtst = await rtstData.json();
+        const picData = await fetch(`${DBURL}/characters/${i}`)
+        const pic = await picData.json();
 
-        // setArtist(rtst[0]);
+        // setPiece(pic[0]);
 
         setPiece(
             {
-                name: rtst[0].name,
-                img: rtst[0].img,
-                id: rtst[0].char_id
+                name: pic[0].name,
+                img: pic[0].img,
+                id: pic[0].char_id
             }
         )
         setShowPiece(!showPiece)
@@ -155,14 +159,14 @@ export default function GalleryPeek() {
                     initial="hidden"
                     animate="visible"
                     >
-                        {artists.slice(0,4).map((i) => (
+                        {gallery.slice(0,4).map((i) => (
                             <Item
                                 key={i.char_id}
                                 variants={ItemAnimation}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.9 }}
                                 transition={{ duration: 0.2 }}
-                                onClick={() => fetchArtist(i.char_id)}
+                                onClick={() => fetchPiece(i.char_id)}
                                 >
                                     <Img src={i.img} alt={i.name} id={i.char_id} />
                             </Item>
@@ -171,17 +175,17 @@ export default function GalleryPeek() {
                             variants={ItemAnimation}
                             whileHover={{ scale: 1.05 }}>
                             <Link to='/gallery'>
-                                VIEW FULL GALLERY
+                                <P>VIEW FULL GALLERY</P>
                             </Link>
                         </Li>
-                        {artists.slice(5,9).map((i) => (
+                        {gallery.slice(5,9).map((i) => (
                             <Item
                                 key={i.char_id}
                                 variants={ItemAnimation}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.9 }}
                                 transition={{ duration: 0.2 }}
-                                onClick={() => fetchArtist(i.char_id)}
+                                onClick={() => fetchPiece(i.char_id)}
                                 >
                                     <Img src={i.img} alt={i.name} id={i.char_id} />
                             </Item>

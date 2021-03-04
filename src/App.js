@@ -81,7 +81,7 @@ const BottomBGImg = styled(motion.img)`
   bottom: 0%;
 
   -webkit-filter: drop-shadow(0px 2px 2px #000000);
-    filter: drop-shadow(0px 2px 2px #000000);
+  filter: drop-shadow(0px 2px 2px #000000);
 `
 
 
@@ -148,7 +148,7 @@ export default function App() {
       </PieceContext.Provider>
 
       <MainBGImg src={main_bg_img} />
-      <BottomBGImg src={bottom_bg_img} />
+      {/* <BottomBGImg src={bottom_bg_img} /> */}
     </div>
   )
 }
