@@ -56,8 +56,8 @@ const Item = styled(motion.li)`
 
 const Img = styled(motion.img)`
     width: 100%;
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
 `
 
 const ItemTitle = styled.h1`
@@ -116,10 +116,11 @@ export default function GalleryPeek() {
   
     const fetchGallery = async () => {
       
-      const gallData = await fetch(`${DBURL}/characters`)
+      const gallData = await fetch(`${DBURL}/gallery`)
       const gall = await gallData.json();
 
       setGallery(gall);
+    //   console.log(gall)
       
     }
 
@@ -129,21 +130,40 @@ export default function GalleryPeek() {
     const { piece, setPiece } = useContext(PieceContext)
     const { showPiece, setShowPiece } = useContext(PieceModalToggleContext)
 
-  
-    const fetchPiece = async (i) => {
-      
-        const picData = await fetch(`${DBURL}/characters/${i}`)
-        const pic = await picData.json();
+    const fetchArtist = async (i, j, k, l) => {
 
-        // setPiece(pic[0]);
+        const rtstData = await fetch(`${DBURL}/artists/${i}`)
+        const rtst = await rtstData.json();
 
         setPiece(
             {
-                name: pic[0].name,
-                img: pic[0].img,
-                id: pic[0].char_id
+                title: j,
+                slug: k,
+                img: l,
+                artistSlug: i,
+                artistName: rtst.name
             }
         )
+
+    }
+
+    const fetchPiece = async (i) => {
+      
+        const picData = await fetch(`${DBURL}/gallery/${i}`)
+        const pic = await picData.json();
+        
+        fetchArtist(pic.artist_id, pic.title, pic.slug, pic.art_image)
+
+        // setPiece(
+        //     {
+        //         title: pic.title,
+        //         slug: pic.slug,
+        //         img: pic.art_image,
+        //         artistSlug: pic.artist_id,
+        //         *** artistName: artist ***
+        //     }
+        // )
+
         setShowPiece(!showPiece)
 
     }
@@ -161,14 +181,14 @@ export default function GalleryPeek() {
                     >
                         {gallery.slice(0,4).map((i) => (
                             <Item
-                                key={i.char_id}
+                                key={i.slug}
                                 variants={ItemAnimation}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.9 }}
                                 transition={{ duration: 0.2 }}
-                                onClick={() => fetchPiece(i.char_id)}
+                                onClick={() => fetchPiece(i.slug)}
                                 >
-                                    <Img src={i.img} alt={i.name} id={i.char_id} />
+                                    <Img src={i.art_image} alt={i.title} id={i.slug} />
                             </Item>
                         ))}
                         <Li 
@@ -180,14 +200,14 @@ export default function GalleryPeek() {
                         </Li>
                         {gallery.slice(5,9).map((i) => (
                             <Item
-                                key={i.char_id}
+                                key={i.slug}
                                 variants={ItemAnimation}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.9 }}
                                 transition={{ duration: 0.2 }}
-                                onClick={() => fetchPiece(i.char_id)}
+                                onClick={() => fetchPiece(i.slug)}
                                 >
-                                    <Img src={i.img} alt={i.name} id={i.char_id} />
+                                    <Img src={i.art_image} alt={i.title} id={i.slug} />
                             </Item>
                         ))}
                 </ItemContainer>

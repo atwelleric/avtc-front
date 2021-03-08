@@ -91,31 +91,6 @@ const BottomBGImg = styled(motion.img)`
 export default function App() {
 
 
-  //  //  //  DATA FETCHING FROM DB   //  //  //
-
-  // useEffect(() => {fetchData()}, []);
-
-  // const [ artists, setArtists ] = useState([]); 
-  // const [ gallery, setGallery ] = useState([]);
-
-  // const fetchData = async () => {
-    
-  //   const charData = await fetch(`${DBURL}/characters`)
-  //   const char = await charData.json();
-  //   setArtists(char)
-
-  //   const imgs = [];
-  //   artists.map((artist) => {
-  //     imgs.push(artist.img)
-  //   })
-  //   setGallery(imgs);
-
-  //   // console.log(artists)
-  //   // console.log(gallery)
-    
-  // }
-
-
   //  //  //  PIECE MASTER SETTINGS  //  //  //
 
   const [ piece, setPiece ] = useState('wazzap')
@@ -123,10 +98,6 @@ export default function App() {
 
   const [ showPiece, setShowPiece ] = useState(false)
   const providerShowPiece = useMemo (() =>  ({ showPiece, setShowPiece }), [ showPiece, setShowPiece ])
-
-  
-
-
 
 
   //  //  //  RENDER    //  //  //
