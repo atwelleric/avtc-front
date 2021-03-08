@@ -4,6 +4,12 @@ import { motion } from 'framer-motion'
 import styled from 'styled-components'
 import { LoremIpsum } from 'react-lorem-ipsum'
 
+// import Swiper from 'swiper'
+import Swiper from 'swiper/bundle'
+import 'swiper/swiper-bundle.css'
+import SwiperCore, { Navigation, Pagination } from 'swiper/core'
+// SwiperCore.use([Navigation, Pagination])
+
 import { PieceContext, PieceModalToggleContext } from '../helperFunctions/avtcContext'
 import { DBURL } from '../helperFunctions/config'
 
@@ -137,7 +143,7 @@ const JobTitle = styled.h1`
 
     margin: 0;
     padding: 2vmin;
-    font-size: 15px;
+    font-size: 20px;
 
     border-top: 1px solid rgba(255, 255, 255, 0.7);
 
@@ -145,7 +151,7 @@ const JobTitle = styled.h1`
 
 const Specialty = styled.h1`
     /* font-size: 2vh; */
-    font-size: 15px;
+    font-size: 20px;
 `
 
 const SocialMediaContainer = styled(motion.ul)`
@@ -158,7 +164,7 @@ const SocialMediaContainer = styled(motion.ul)`
     padding-inline-start: 0;
 
     width: inherit;
-    border-top: 1px solid rgba(255, 255, 255, 0.7);
+    /* border-top: 1px solid rgba(255, 255, 255, 0.7); */
     /* border-bottom: 1px solid rgba(255, 255, 255, 0.7); */
     display: grid;
 
@@ -220,6 +226,8 @@ const BotttomSpacing = styled.div`
     margin-top: 50vmin;
 `
 
+// const swiper = new Swiper(...)
+
 
 //  //  //  VARIABLES   //  //  //
 
@@ -252,20 +260,24 @@ export default function ArtistProfile({ match }) {
     //  //  //  DATA FETCHING FROM DB   //  //  //
 
     // console.log(match.params.artistSlug)
-  
-    useEffect(() => {fetchArtist()}, []);
+
+    useEffect(() => {
+		fetchArtistInfo();
+	}, []);
 
     const [ artist, setArtist ] = useState([]);
-  
-    const fetchArtist = async () => {
+
+	const fetchArtistInfo = async () => {
       
-      const rtstData = await fetch(`${DBURL}/characters/${match.params.artistSlug}`)
-      const rtst = await rtstData.json();
+        // const rtstData = await fetch(`${DBURL}/characters/${match.params.artistSlug}`)
+        const rtstData = await fetch(`${DBURL}/artists/${match.params.artistSlug}`)
+        const rtst = await rtstData.json();
 
-      setArtist(rtst[0]);
+        setArtist(rtst);
 
-    }
-
+        // console.log(rtst)
+	};
+        
 
     //  //  //  PIECE SETTINGS    //  //  //
 
@@ -277,8 +289,6 @@ export default function ArtistProfile({ match }) {
       
         const picData = await fetch(`${DBURL}/characters/${i}`)
         const pic = await picData.json();
-
-        // setPiece(pic[0]);
 
         setPiece(
             {
@@ -296,8 +306,8 @@ export default function ArtistProfile({ match }) {
 
     const contactArtist = [
         [iconCalendar, 'Book Now'],
-        [iconInstagram, 'Contact', artist.img],
-        [iconFacebook, 'Contact', 'https://www.facebook.com/avtatco/']
+        [iconInstagram, 'Contact', artist.instagram],
+        [iconFacebook, 'Contact', artist.facebook]
     ]
 
 
@@ -308,24 +318,14 @@ export default function ArtistProfile({ match }) {
                 <Container>
 
                     <ArtistImgContainer>
-                        <ArtistImg src={artist.img}/>
+                        <ArtistImg src={artist.profile_image}/>
                     </ArtistImgContainer>
 
-
-                        <ArtistName>{artist.name}</ArtistName>
-
+                    <ArtistName>{artist.name}</ArtistName>
 
                     <ArtistInfoContainer>
                         <>
-
-                            {/* {artist.job_title} */}
-
-                            {/* <JobTitle>{artist.occupation}</JobTitle> */}
-
-                            {/* {artist.occupation[0]=undefined ? null : <JobTitle>{artist.occupation[0]}</JobTitle>} */}
-
-                            <JobTitle>American Traditional Tattoo Master</JobTitle>
-
+                            {<JobTitle>{artist.job_title}</JobTitle>}
                         </>
 
                         <InfoSection>
@@ -333,30 +333,37 @@ export default function ArtistProfile({ match }) {
                             <br/>
                             Specialties:
 
-                            <Specialty>
-                                American Traditional
-                            </Specialty>
-
-                            <Specialty>
-                                Animals
-                            </Specialty>
-
-                            <Specialty>
-                                Realism
-                            </Specialty>
-
-                            {/* {artist.specialty_one ? <Specialty>{artist.specialty_one}</Specialty> : null}
+                            {artist.specialty_one ? <Specialty>{artist.specialty_one}</Specialty> : null}
                             {artist.specialty_two ? <Specialty>{artist.specialty_two}</Specialty> : null}
-                            {artist.specialty_three ? <Specialty>{artist.specialty_three}</Specialty> : null} */}
-
-                            {/* {artist.appearance[0]=undefined ? null : <Specialty>{artist.appearance[0]}</Specialty>}
-                            {artist.appearance[1]=undefined ? null : <Specialty>{artist.appearance[1]}</Specialty>}
-                            {artist.appearance[2]=undefined ? null : <Specialty>{artist.appearance[2]}</Specialty>} */}
+                            {artist.specialty_three ? <Specialty>{artist.specialty_three}</Specialty> : null}
                         </InfoSection>
 
                         <InfoSection>
-                            <LoremIpsum p={1}/>
-                            {/* {artist.bio=undefined ? null : <p>{artist.bio}</p>} */}
+                            {/* <LoremIpsum p={1}/> */}
+                            {artist.bio ? <p>{artist.bio}</p> : null}
+                        </InfoSection>
+
+                        <InfoSection>
+                            {/* <!-- Slider main container --> */}
+                            <div class="swiper-container">
+                            {/* <!-- Additional required wrapper --> */}
+                            <div class="swiper-wrapper">
+                                {/* <!-- Slides --> */}
+                                <div class="swiper-slide">Slide 1</div>
+                                <div class="swiper-slide">Slide 2</div>
+                                <div class="swiper-slide">Slide 3</div>
+                                ...
+                            </div>
+                            {/* <!-- If we need pagination --> */}
+                            <div class="swiper-pagination"></div>
+
+                            {/* <!-- If we need navigation buttons --> */}
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+
+                            {/* <!-- If we need scrollbar --> */}
+                            <div class="swiper-scrollbar"></div>
+                            </div>
                         </InfoSection>
 
                         <InfoSection>
@@ -383,7 +390,6 @@ export default function ArtistProfile({ match }) {
                             <br/>
                             <br/>
                             <br/>
-                            {/* FOLLOW ON SOCIAL MEDIA */}
                             <SocialMediaContainer
                                 variants={ItemContainerAnimation}
                                 initial="hidden"
@@ -396,16 +402,16 @@ export default function ArtistProfile({ match }) {
                                             whileHover={{ scale: 1.1 }}
                                             whileTap={{ scale: 0.9 }}
                                             transition={{ duration: 0.08 }}
-                                            // onClick={closeModals}
                                             >
                                             <SocialMediaIcon src={i[0]} alt={i[0]} id={i[0]}/>
-                                            {/* <SocialMediaTitle>{i[1]}</SocialMediaTitle> */}
                                         </SocialMediaItem>
                                     </a>
                                 ))}
                             </SocialMediaContainer>
                         </InfoSection>
+
                         <BotttomSpacing/>
+                        
                         <BottomBGImg src={bottom_bg_img} />
                     </ArtistInfoContainer>
                 </Container>

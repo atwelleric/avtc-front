@@ -75,21 +75,20 @@ const PieceArtist = styled(motion.h1)`
 //  //  //  VARIABLES   //  //  //
 
 const ItemContainerAnimation = {
-    hidden: { opacity: 1, scale: 0 },
+    hidden: { opacity: 0 },
     visible: {
         opacity: 1,
-        scale: 1,
         transition: {
-        delayChildren: 0.7,
-        staggerChildren: 0.5
-        }
+            delayChildren: 1
+        },
+        delay: .5
     }
 };
   
 const ItemAnimation = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { x: -50, opacity: 0 },
     visible: {
-        y: 0,
+        x: 0,
         opacity: 1
     }
 };
@@ -112,33 +111,37 @@ export default function PieceModal() {
         <>
             {showPiece ?
                 <Container
+                    variants={ItemContainerAnimation}
+                    transition={{ duration: .2 }}
+                    initial="hidden"
+                    animate="visible"
                     onClick={() => setShowPiece(!showPiece)}
                     >
                     <SubContainer 
-                        variants={ItemContainerAnimation}
+                        variants={ItemAnimation}
                         initial="hidden"
                         animate="visible"
                         >
                         <Img
                             src={piece.img}
-                            alt={piece.name}
-                            variants={ItemAnimation}
-                            transition={{ duration: 0.2 }}
+                            alt={piece.title}
+                            // variants={ItemAnimation}
+                            // transition={{ duration: 0.2 }}
                             />
                         <PieceTitle
-                            variants={ItemAnimation}
-                            transition={{ duration: 0.2 }}
+                            // variants={ItemAnimation}
+                            // transition={{ duration: 0.2 }}
                             >
-                            {piece.name}
+                            {piece.title}
                         </PieceTitle>
-                        <Link key={piece.id} to={`/${piece.id}`}>
+                        <Link key={piece.artistSlug} to={`/${piece.artistSlug}`}>
                             <PieceArtist
-                                variants={ItemAnimation}
+                                // variants={ItemAnimation}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.9 }}
-                                transition={{ duration: 0.2 }}
+                                transition={{ duration: 0.1 }}
                                 >
-                                    {piece.id}
+                                    View {piece.artistName}'s Profile
                             </PieceArtist>
                         </Link>
                     </SubContainer>
