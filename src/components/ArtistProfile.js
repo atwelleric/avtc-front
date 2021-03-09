@@ -4,15 +4,10 @@ import { motion } from 'framer-motion'
 import styled from 'styled-components'
 import { LoremIpsum } from 'react-lorem-ipsum'
 
-// import Swiper from 'swiper'
-import Swiper from 'swiper/bundle'
-import 'swiper/swiper-bundle.css'
-import SwiperCore, { Navigation, Pagination } from 'swiper/core'
-// SwiperCore.use([Navigation, Pagination])
+import Carousel from './GalleryCarousel'
 
 import { PieceContext, PieceModalToggleContext } from '../helperFunctions/avtcContext'
 import { DBURL } from '../helperFunctions/config'
-
 
 import bottom_bg_img from '../images/streetViewCrop.png'
 import iconInstagram from '../images/iconInstagram.png'
@@ -317,8 +312,8 @@ export default function ArtistProfile({ match }) {
 
     const contactArtist = [
         [iconCalendar, 'Book Now'],
-        [iconInstagram, 'Contact', artist.instagram],
-        [iconFacebook, 'Contact', artist.facebook]
+        [iconInstagram, 'Instagram', artist.instagram],
+        [iconFacebook, 'Facebook', artist.facebook]
     ]
 
 
@@ -355,26 +350,7 @@ export default function ArtistProfile({ match }) {
                         </InfoSection>
 
                         <InfoSection>
-                            {/* <!-- Slider main container --> */}
-                            <div class="swiper-container">
-                            {/* <!-- Additional required wrapper --> */}
-                            <div class="swiper-wrapper">
-                                {/* <!-- Slides --> */}
-                                <div class="swiper-slide">Slide 1</div>
-                                <div class="swiper-slide">Slide 2</div>
-                                <div class="swiper-slide">Slide 3</div>
-                                ...
-                            </div>
-                            {/* <!-- If we need pagination --> */}
-                            <div class="swiper-pagination"></div>
-
-                            {/* <!-- If we need navigation buttons --> */}
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-button-next"></div>
-
-                            {/* <!-- If we need scrollbar --> */}
-                            <div class="swiper-scrollbar"></div>
-                            </div>
+                            {/* <Carousel /> */}
                         </InfoSection>
 
                         <InfoSection>
@@ -415,13 +391,14 @@ export default function ArtistProfile({ match }) {
                                             transition={{ duration: 0.08 }}
                                             >
                                             <SocialMediaIcon src={i[0]} alt={i[0]} id={i[0]}/>
+                                            {/* <SocialMediaTitle>{i[1]}</SocialMediaTitle> */}
                                         </SocialMediaItem>
                                     </a>
                                 ))}
                             </SocialMediaContainer>
                         </InfoSection>
 
-                        <BotttomSpacing/>
+                        <BotttomSpacing />
                         
                         <BottomBGImg src={bottom_bg_img} />
                     </ArtistInfoContainer>
