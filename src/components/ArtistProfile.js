@@ -58,13 +58,10 @@ const ArtistImgContainer = styled.div`
     z-index: -10;
 
     /* margin-top: 30vmin; */
-    width: 50vmin;
-    height: 50vmin;
+    min-width: 70vmin;
+    min-height: 70vmin;
     /* max-width: 70vmin; */
-
     
-	/* width: 230px;
-	height: 230px; */
 	margin: 0;
 	padding: 0;
     -webkit-transform: translate(-50%, -50%);
@@ -84,8 +81,16 @@ const ArtistImgContainer = styled.div`
 `
 
 const ArtistImg = styled(motion.img)`
-    width: 50vmin;
+    display: block;
+    /* width: 50vmin; */
     /* max-width: 70vmin; */
+    /* min-width: inherit;
+    min-height: inherit; */
+
+    min-width: inherit;
+    min-height: inherit;
+    max-height: 130vmin;
+    object-fit: cover;
 
     margin: 0;
 	padding: 0;
@@ -99,6 +104,7 @@ const ArtistName = styled.h1`
     z-index: +10;
     font-size: 3vh;
     color: rgba(255, 255, 255, 0.7);
+	text-transform: uppercase;
 
 	margin: 0;
 	padding: 0;
@@ -137,6 +143,11 @@ const ArtistInfoContainer = styled(motion.div)`
 
 const InfoSection = styled.div`
     margin: 5vmin 5vmin 0 5vmin;
+`
+
+const InfoSectionTitle = styled.div`
+	text-transform: uppercase;
+    font-size: 15px;
 `
 
 const JobTitle = styled.h1`
@@ -331,7 +342,7 @@ export default function ArtistProfile({ match }) {
                         <InfoSection>
                             <br/>
                             <br/>
-                            Specialties:
+                            <InfoSectionTitle>Specialties:</InfoSectionTitle>
 
                             {artist.specialty_one ? <Specialty>{artist.specialty_one}</Specialty> : null}
                             {artist.specialty_two ? <Specialty>{artist.specialty_two}</Specialty> : null}

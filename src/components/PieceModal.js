@@ -86,9 +86,9 @@ const ItemContainerAnimation = {
 };
   
 const ItemAnimation = {
-    hidden: { x: -50, opacity: 0 },
+    hidden: { y: -50, opacity: 0 },
     visible: {
-        x: 0,
+        y: 0,
         opacity: 1
     }
 };
@@ -102,7 +102,7 @@ export default function PieceModal() {
 
     //  //  //  PIECE SETTINGS    //  //  //
 
-    const { piece, setPiece } = useContext(PieceContext)
+    const { piece } = useContext(PieceContext)
     const { showPiece, setShowPiece } = useContext(PieceModalToggleContext)
 
 

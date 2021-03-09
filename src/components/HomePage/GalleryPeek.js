@@ -55,7 +55,20 @@ const Item = styled(motion.li)`
 `
 
 const Img = styled(motion.img)`
-    width: 100%;
+    display: block;
+
+    min-width: inherit;
+    min-height: inherit;
+    max-height: 45vmin;
+
+    margin: 0;
+	padding: 0;
+    -webkit-transform: translate(-50%, -50%);
+    position: relative;
+	left: 50%;
+	top: 50%;
+
+    object-fit: cover;
     -webkit-filter: grayscale(0%);
     filter: grayscale(0%);
 `
@@ -130,39 +143,20 @@ export default function GalleryPeek() {
     const { piece, setPiece } = useContext(PieceContext)
     const { showPiece, setShowPiece } = useContext(PieceModalToggleContext)
 
-    const fetchArtist = async (i, j, k, l) => {
-
-        const rtstData = await fetch(`${DBURL}/artists/${i}`)
-        const rtst = await rtstData.json();
-
-        setPiece(
-            {
-                title: j,
-                slug: k,
-                img: l,
-                artistSlug: i,
-                artistName: rtst.name
-            }
-        )
-
-    }
-
     const fetchPiece = async (i) => {
       
         const picData = await fetch(`${DBURL}/gallery/${i}`)
         const pic = await picData.json();
-        
-        fetchArtist(pic.artist_id, pic.title, pic.slug, pic.art_image)
 
-        // setPiece(
-        //     {
-        //         title: pic.title,
-        //         slug: pic.slug,
-        //         img: pic.art_image,
-        //         artistSlug: pic.artist_id,
-        //         *** artistName: artist ***
-        //     }
-        // )
+        setPiece(
+            {
+                title: pic.title,
+                slug: pic.slug,
+                img: pic.art_image,
+                artistSlug: pic.artist_id,
+                artistName: pic.artist_name
+            }
+        )
 
         setShowPiece(!showPiece)
 
