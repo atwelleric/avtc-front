@@ -140,7 +140,7 @@ export default function GalleryPeek() {
 
     //  //  //  PIECE SETTINGS    //  //  //
 
-    const { piece, setPiece } = useContext(PieceContext)
+    const { setPiece } = useContext(PieceContext)
     const { showPiece, setShowPiece } = useContext(PieceModalToggleContext)
 
     const fetchPiece = async (i) => {
