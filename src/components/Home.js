@@ -72,7 +72,7 @@ export default function Home() {
             </HomePageSection>
             <HomePageSection><Services /></HomePageSection>
             <HomePageSection><GalleryPeek /></HomePageSection>
-            <HomePageSection><ArtistCards /></HomePageSection>
+            {/* <HomePageSection><ArtistCards /></HomePageSection> */}
             <HomePageSection><MerchandisePeek /></HomePageSection>
             <HomePageSection><ContactUs /></HomePageSection>
             <BottomBGImg src={bottom_bg_img} alt={bottom_bg_img} />

@@ -144,7 +144,6 @@ export default function OriginalGallery() {
       const gall = await gallData.json();
 
       setGallery(gall);
-    //   console.log(gall)
       
     }
 
