@@ -59,6 +59,11 @@ const MenuButton = styled(motion.div)`
     box-sizing: padding-box;
 `
 
+const Button = styled(motion.button)`
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+`
+
 const AVTCButton = styled(motion.div)`
     z-index: 1000;
     cursor: pointer;
@@ -158,9 +163,9 @@ export default function NavBar() {
                         animate={animate} 
                         onClick={toggleMenu}
                         >
-                        <Link to=''>
+                        <Button to={null}>
                             <MenuImg id='menuImage' src={menu} alt="menu"/>
-                        </Link>
+                        </Button>
                     </MenuButton>
                     {/* <button onClick={() => setShowPiece(!showPiece)}>{showPiece ? 'close' : 'open'}</button> */}
                     <AVTCButton id='mainHomeButton' role="button" aria-pressed="false" tabindex="0"
