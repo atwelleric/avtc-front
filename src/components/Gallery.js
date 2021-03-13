@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
-import GalleryCarousel from './GalleryCarousel'
+import GalleryCarousel from './Gallery/GalleryCarousel'
+import OriginalGallery from './Gallery/OriginalGallery'
 
 import bottom_bg_img from '../images/streetViewCrop.png'
 
 
-//  //  //  STYLEC COMPONENTS   //  //  //
+//  //  //  STYLED COMPONENTS   //  //  //
 
 const Container = styled(motion.div)`
     display: flex;
@@ -19,16 +20,14 @@ const Container = styled(motion.div)`
 `
 
 const BottomBGImg = styled(motion.img)`
-    z-index: -90;
+    z-index: 0;
 
     width: 100vw;
-    /* max-width: 1000px; */
-
 
     margin: 0;
     padding: 0;
     -webkit-transform: translate(-50%, -100%);
-    position: absolute;
+    position: relative;
     left: 50%;
     top: 100%;
 
@@ -58,9 +57,7 @@ export default function Gallery() {
     return (
         <>
             <Container>
-                <CarouselContainer>
-                    <GalleryCarousel />
-                </CarouselContainer>
+                <OriginalGallery />
                 <BottomBGImg src={bottom_bg_img} />
             </Container>
         </>
