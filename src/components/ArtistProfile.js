@@ -109,7 +109,7 @@ const ArtistImg = styled(motion.img)`
 `
 
 const ArtistName = styled.h1`
-    z-index: +10;
+    z-index: +5;
     font-size: 3vh;
     color: rgba(255, 255, 255, 0.7);
 	text-transform: uppercase;
@@ -278,17 +278,12 @@ export default function ArtistProfile({ match }) {
 
     //  //  //  DATA FETCHING FROM DB   //  //  //
 
-    // console.log(match.params.artistSlug)
-
-    useEffect(() => {
-		fetchArtistInfo();
-	}, []);
+    useEffect(() => {fetchArtistInfo()}, []);
 
     const [ artist, setArtist ] = useState([]);
 
 	const fetchArtistInfo = async () => {
       
-        // const rtstData = await fetch(`${DBURL}/characters/${match.params.artistSlug}`)
         const rtstData = await fetch(`${DBURL}/artists/${match.params.artistSlug}`)
         const rtst = await rtstData.json();
 
@@ -348,8 +343,8 @@ export default function ArtistProfile({ match }) {
                         </>
 
                         <InfoSection>
-                            <ArtistCarousel />
                         </InfoSection>
+                            <ArtistCarousel artistSlug={match.params.artistSlug}/>
 
                         <InfoSection>
                             <br/>
