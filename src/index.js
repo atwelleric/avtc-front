@@ -6,7 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <Router basename='/'>
+  <Router basename='/avtc/'>
     <App /> 
   </Router>,
   document.getElementById('root')
