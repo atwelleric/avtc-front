@@ -9,13 +9,25 @@ import { DBURL } from '../../helperFunctions/config'
 
 //  //  //  STYLED-COMPONENTS   //  //  //
 
+const Margin = styled(motion.section)`
+    margin-top: 10vh;
+`
+
 const Section = styled.section`
-    overflow: hidden;
+    /* overflow: hidden; */
     padding: 0;
-    margin: 3vmin;
-    display: flex;
+    /* margin: 3vmin; */
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
+
+    /* margin: 0;
+	padding: 0;
+    -webkit-transform: translate(-50%, -50%);
+    position: relative;
+	left: 50%;
+	top: 50%; */
+
 `
 
 const ItemContainer = styled(motion.ul)`
@@ -28,38 +40,49 @@ const ItemContainer = styled(motion.ul)`
     padding-inline-start: 0;
 
     width: 100vmin;
-    height: 90.009vmin;
+    /* height: 90.009vmin; */
     max-width: 1000px;
-    max-height: 1000px;
+    /* max-height: 1000px; */
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 30%);
     /* grid-template-rows: repeat(2, 1fr); */
 	/* grid-template-columns: repeat(auto-fill, minmax(26vmin, 1fr)); */
-    justify-items: stretch;
+    justify-content: center;
+    align-content: center;
     gap: 2vmin;
-    padding: 2vmin;
-    background: rgba(255, 255, 255, 0.07);
+    padding: 2vmin 0 2vmin 0;
+    /* background: rgba(255, 255, 255, 0.07); */
+    /* background: pink; */
     /* background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.421), rgba(50, 50, 50, 0.421), rgba(255, 255, 255, 0.171), rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.171), rgba(50, 50, 50, 0.421), rgba(0, 0, 0, 0.421), rgba(0, 0, 0, 0)); */
     /* border-radius: 30px; */
     -webkit-filter: drop-shadow(0px 2px 2px #000000);
     filter: drop-shadow(0px 2px 2px #000000);
+
+
+	border-top: 1px solid rgba(255, 255, 255, 0.7);
 `
 
 const Item = styled(motion.li)`
     /* width: 25.14433811802233vmin; */
-    /* max-width: 315.31px; */
+    /* max-width: 333px; */
     /* width: 25.14433811802233vmin; */
-    /* max-height: 315.31px; */
-    background-color: rgba(0, 0, 0, 0.5);
+    /* max-height: 333px; */
+    /* background-color: rgba(0, 0, 0, 0.5); */
+
+    width: 30vmin;
+    height: 30vmin;
+    max-width: 300px ;
+    max-height: 300px ;
+
     overflow: hidden;
 `
 
 const Img = styled(motion.img)`
     display: block;
 
-    min-width: inherit;
-    min-height: inherit;
-    max-height: 45vmin;
+    /* min-width: inherit;
+    min-height: inherit; */
+    max-height: 50vmin;
 
     margin: 0;
 	padding: 0;
@@ -69,27 +92,15 @@ const Img = styled(motion.img)`
 	top: 50%;
 
     object-fit: cover;
-    -webkit-filter: grayscale(0%);
-    filter: grayscale(0%);
+    -webkit-filter: grayscale(0%) opacity(100%);
+    filter: grayscale(0%) opacity(100%);
 `
 
-const ItemTitle = styled.h1`
-    font-size: 15px;
+const PageTitle = styled.h1`
     width: 100%;
-`
-
-const Li = styled(motion.li)`
-    background-color: rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    display: grid;
-    align-items: center;
-    justify-content: center;
-`
-
-const P = styled.p`
+    font-size: 3vh;
     color: rgba(255, 255, 255, 0.7);
+	text-transform: uppercase;
 `
 
 
@@ -118,7 +129,7 @@ const ItemAnimation = {
 
 //  //  //  FUNCTION    //  //  //
 
-export default function GalleryPeek() {
+export default function OriginalGallery() {
 
 
     //  //  //  DATA FETCHING FROM DB   //  //  //
@@ -133,6 +144,7 @@ export default function GalleryPeek() {
       const gall = await gallData.json();
 
       setGallery(gall);
+    //   console.log(gall)
       
     }
 
@@ -166,32 +178,15 @@ export default function GalleryPeek() {
 
     return (
         <>
+            <Margin />
+            <PageTitle>Our Work</PageTitle>
             <Section>
                 <ItemContainer
                     variants={ItemContainerAnimation}
                     initial="hidden"
                     animate="visible"
                     >
-                        {gallery.slice(0,4).map((i) => (
-                            <Item
-                                key={i.slug}
-                                variants={ItemAnimation}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.9 }}
-                                transition={{ duration: 0.2 }}
-                                onClick={() => fetchPiece(i.slug)}
-                                >
-                                    <Img src={i.art_image} alt={i.title} id={i.slug} />
-                            </Item>
-                        ))}
-                        <Li 
-                            variants={ItemAnimation}
-                            whileHover={{ scale: 1.05 }}>
-                            <Link to='/gallery'>
-                                <P>VIEW FULL GALLERY</P>
-                            </Link>
-                        </Li>
-                        {gallery.slice(5,9).map((i) => (
+                        {gallery.map((i) => (
                             <Item
                                 key={i.slug}
                                 variants={ItemAnimation}

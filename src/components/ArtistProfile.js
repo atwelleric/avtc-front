@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import styled from 'styled-components'
 import { LoremIpsum } from 'react-lorem-ipsum'
 
-import Carousel from './GalleryCarousel'
+import ArtistCarousel from './ArtistProfile/ArtistCarousel'
 
 import { PieceContext, PieceModalToggleContext } from '../helperFunctions/avtcContext'
 import { DBURL } from '../helperFunctions/config'
@@ -26,6 +26,19 @@ const Container = styled(motion.div)`
     justify-items: center;
     align-items: center;
     color: rgba(255, 255, 255, 0.7);
+`
+
+const CarouselContainer = styled(motion.div)`
+    
+    margin: 0;
+    padding: 0;
+    /* transform: translate(-50%, -50%);
+    position: relative;
+    left: 50%;
+    top: 50%; */
+
+    display: grid;
+    place-content: center;
 `
 
 const BottomBGImg = styled(motion.img)`
@@ -335,6 +348,10 @@ export default function ArtistProfile({ match }) {
                         </>
 
                         <InfoSection>
+                            <ArtistCarousel />
+                        </InfoSection>
+
+                        <InfoSection>
                             <br/>
                             <br/>
                             <InfoSectionTitle>Specialties:</InfoSectionTitle>
@@ -347,10 +364,6 @@ export default function ArtistProfile({ match }) {
                         <InfoSection>
                             {/* <LoremIpsum p={1}/> */}
                             {artist.bio ? <p>{artist.bio}</p> : null}
-                        </InfoSection>
-
-                        <InfoSection>
-                            {/* <Carousel /> */}
                         </InfoSection>
 
                         <InfoSection>
