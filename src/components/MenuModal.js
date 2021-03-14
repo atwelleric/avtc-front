@@ -83,8 +83,8 @@ export default function MenuModal({ showMenu, setShowMenu, showPiece, setShowPie
                             transition={{ duration: 0.08 }}
                             >
                             {focusHome ?
-                                <><A href='/'><span> - </span>HOME<span> - </span></A></>
-                                : <A href='/'>HOME</A>
+                                <><A href='/avtc/'><span> - </span>HOME<span> - </span></A></>
+                                : <A href='/avtc/'>HOME</A>
                             }
                         </LI>
                         <LI className='links'
@@ -96,8 +96,8 @@ export default function MenuModal({ showMenu, setShowMenu, showPiece, setShowPie
                             onClick={closeModals}
                             >
                             {focusGallery ?
-                                <><A href='/gallery'><span> - </span>GALLERY<span> - </span></A></>
-                                : <A href='/gallery'>GALLERY</A>
+                                <><A href='/avtc/gallery'><span> - </span>GALLERY<span> - </span></A></>
+                                : <A href='/avtc/gallery'>GALLERY</A>
                             }
                         </LI>
                         <LI className='links'
@@ -109,8 +109,8 @@ export default function MenuModal({ showMenu, setShowMenu, showPiece, setShowPie
                             onClick={closeModals}
                             >
                             {focusResidentArtists ?
-                                <><A href='/#artistCards'><span> - </span>RESIDENT ARTISTS<span> - </span></A></>
-                                : <A href='/#artistCards'>RESIDENT ARTISTS</A>
+                                <><A href='/avtc/#artistCards'><span> - </span>RESIDENT ARTISTS<span> - </span></A></>
+                                : <A href='/avtc/#artistCards'>RESIDENT ARTISTS</A>
                             }
                         </LI>
                         <LI className='links'
@@ -122,8 +122,8 @@ export default function MenuModal({ showMenu, setShowMenu, showPiece, setShowPie
                             onClick={closeModals}
                             >
                             {focusMerchandise ?
-                                <><A href='/#merchandisePeek'><span> - </span>MERCHANDISE<span> - </span></A></>
-                                : <A href='/#merchandisePeek'>MERCHANDISE</A>
+                                <><A href='/avtc/#merchandisePeek'><span> - </span>MERCHANDISE<span> - </span></A></>
+                                : <A href='/avtc/#merchandisePeek'>MERCHANDISE</A>
                             }
                         </LI>
                         <LI className='links'
@@ -135,8 +135,8 @@ export default function MenuModal({ showMenu, setShowMenu, showPiece, setShowPie
                             onClick={closeModals}
                             >
                             {focusContactUs ?
-                                <><A href='/#contactUs'><span> - </span>CONTACT US<span> - </span></A></>
-                                : <A href='/#contactUs'>CONTACT US</A>
+                                <><A href='/avtc/#contactUs'><span> - </span>CONTACT US<span> - </span></A></>
+                                : <A href='/avtc/#contactUs'>CONTACT US</A>
                             }
                         </LI>
                     </UL>
@@ -154,37 +154,37 @@ export default function MenuModal({ showMenu, setShowMenu, showPiece, setShowPie
 //     return (
 //         <nav>
 
-            // {/* <Link className='links' to='/'>
+            // {/* <Link className='links' to='/avtc/'>
             //     <h1 className='home-button'>HOME</h1>
             // </Link>
-            // <Link className='links' to='/gallery'>
+            // <Link className='links' to='/avtc/gallery'>
             //     <h1 className='gallery-button'>GALLERY</h1>
             // </Link>
-            // <Link className='links' to='/'>
+            // <Link className='links' to='/avtc/'>
             //     <h1 className='resident-artists-button'>RESIDENT ARTISTS</h1>
             // </Link>
-            // <Link className='links' to='/'>
+            // <Link className='links' to='/avtc/'>
             //     <h1 className='merchandise-button'>MERCHANDISE</h1>
             // </Link>
-            // <Link className='links' to='/'>
+            // <Link className='links' to='/avtc/'>
             //     <h1 className='contact-us-button'>CONTACT US</h1>
             // </Link> */}
 
 //             <ul className='menu-links'>
 //                 <li className='links'>
-//                     <a href='/'>HOME</a>
+//                     <a href='/avtc/'>HOME</a>
 //                 </li>
 //                 <li className='links'>
-//                     <a className='' href='/gallery'>GALLERY</a>
+//                     <a className='' href='/avtc/gallery'>GALLERY</a>
 //                 </li>
 //                 <li className='links'>
-//                     <a href='/#artistCards'>RESIDENT ARTISTS</a>
+//                     <a href='/avtc/#artistCards'>RESIDENT ARTISTS</a>
 //                 </li>
 //                 <li className='links'>
-//                     <a href='/#merchandisePeek'>MERCHANDISE</a>
+//                     <a href='/avtc/#merchandisePeek'>MERCHANDISE</a>
 //                 </li>
 //                 <li className='links'>
-//                     <a href='/#contactUs'>CONTACT US</a>
+//                     <a href='/avtc/#contactUs'>CONTACT US</a>
 //                 </li>
 //             </ul>
 //         </nav>
