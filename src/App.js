@@ -110,9 +110,9 @@ export default function App() {
 
         	<NavBar />
         	<Switch>
-        	    <Route exact path='/' component={Home} />
-        	    <Route exact path='/gallery' component={Gallery} />
-        	    <Route exact path='/:artistSlug' component={ArtistProfile} />
+        	    <Route exact path='/avtc/' component={Home} />
+        	    <Route exact path='/avtc/gallery' component={Gallery} />
+        	    <Route exact path='/avtc/:artistSlug' component={ArtistProfile} />
         	</Switch>
 
         </PieceModalToggleContext.Provider>
