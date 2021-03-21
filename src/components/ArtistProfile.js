@@ -276,6 +276,17 @@ const ItemAnimation = {
 export default function ArtistProfile({ match }) {
 
 
+    //  //  //  SCROLL TO TOP   //  //  //
+
+    function ScrollToTopOnMount() {
+        useEffect(() => {
+        window.scrollTo(0, 0);
+        }, []);
+    
+        return null;
+    }
+
+
     //  //  //  DATA FETCHING FROM DB   //  //  //
 
     useEffect(() => {fetchArtistInfo()}, []);
@@ -328,7 +339,8 @@ export default function ArtistProfile({ match }) {
     //  //  //  FUNCTIONS    //  //  //
 
     return (
-            <div>                
+            <div>
+                <ScrollToTopOnMount />           
                 <Container>
 
                     <ArtistImgContainer>

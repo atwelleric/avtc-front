@@ -1,5 +1,6 @@
 //  //  //  FUNCTIONALITY   //  //  //
 
+import { useEffect } from 'react'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
 
@@ -63,6 +64,8 @@ const BottomBGImg = styled(motion.img)`
 //  //  //  FUNCTION    //  //  //
 
 export default function Home() {
+
+
     return (
         <>
             <HomePageSection>
@@ -72,9 +75,9 @@ export default function Home() {
             </HomePageSection>
             <HomePageSection><Services /></HomePageSection>
             <HomePageSection><GalleryPeek /></HomePageSection>
-            {/* <HomePageSection><ArtistCards /></HomePageSection> */}
-            <HomePageSection><MerchandisePeek /></HomePageSection>
-            <HomePageSection><ContactUs /></HomePageSection>
+            {/* <HomePageSection id='artistCards'><ArtistCards /></HomePageSection> */}
+            <HomePageSection id='merchandisePeek'><MerchandisePeek /></HomePageSection>
+            <HomePageSection id='contactUs'><ContactUs /></HomePageSection>
             <BottomBGImg src={bottom_bg_img} alt={bottom_bg_img} />
         </>
     )

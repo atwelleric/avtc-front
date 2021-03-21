@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
+import { HashLink as Link } from 'react-router-hash-link'
 import styled from 'styled-components'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 import { PieceModalToggleContext } from '../helperFunctions/avtcContext'
 
@@ -59,89 +60,152 @@ const A = styled.a`
 `
 
 
-//  //  //  COMPONENT   //  //  //
+//  //  //  VARIABLES   //  //  //
 
-export default function MenuModal({ showMenu, setShowMenu, showPiece, setShowPiece, closeModals }) {
+const ItemContainerAnimation = {
+    hidden: { x: -100, opacity: 0 },
+    visible: {
+        x: 0,
+        opacity: 1
+    }
+};
+  
+// const ItemAnimation = {
+//     hidden: { y: -50, opacity: 0 },
+//     visible: {
+//         y: 0,
+//         opacity: 1
+//     }
+// };
 
+
+//  //  //  FUNCTION    //  //  //
+
+export default function MenuModal({ showMenu, toggleMenu, closeModals }) {
+
+    
+    //  //  //  ITEM HIGHLIGHT  //  //  //
+    
     const [focusHome, setFocusHome] = useState(false)
     const [focusGallery, setFocusGallery] = useState(false)
     const [focusResidentArtists, setFocusResidentArtists] = useState(false)
     const [focusMerchandise, setFocusMerchandise] = useState(false)
     const [focusContactUs, setFocusContactUs] = useState(false)
 
+    const closeAndUnfocusTitles = () => {
+        closeModals()
+        setFocusHome(false)
+        setFocusGallery(false)
+        setFocusResidentArtists(false)
+        setFocusMerchandise(false)
+        setFocusContactUs(false)
+    }
+
 
     return (
         <>
-            {showMenu ? 
-                <Container>
-                    <UL className='menu-links'>
-                        <LI className='links'
-                            onMouseEnter={() => setFocusHome(true)}
-                            onMouseLeave={() => setFocusHome(false)}
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            transition={{ duration: 0.08 }}
-                            >
-                            {focusHome ?
-                                <><A href='/avtc/'><span> - </span>HOME<span> - </span></A></>
-                                : <A href='/avtc/'>HOME</A>
-                            }
-                        </LI>
-                        <LI className='links'
-                            onMouseEnter={() => setFocusGallery(true)}
-                            onMouseLeave={() => setFocusGallery(false)}
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            transition={{ duration: 0.08 }}
-                            onClick={closeModals}
-                            >
-                            {focusGallery ?
-                                <><A href='/avtc/gallery'><span> - </span>GALLERY<span> - </span></A></>
-                                : <A href='/avtc/gallery'>GALLERY</A>
-                            }
-                        </LI>
-                        <LI className='links'
-                            onMouseEnter={() => setFocusResidentArtists(true)}
-                            onMouseLeave={() => setFocusResidentArtists(false)}
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            transition={{ duration: 0.08 }}
-                            onClick={closeModals}
-                            >
-                            {focusResidentArtists ?
-                                <><A href='/avtc/#artistCards'><span> - </span>RESIDENT ARTISTS<span> - </span></A></>
-                                : <A href='/avtc/#artistCards'>RESIDENT ARTISTS</A>
-                            }
-                        </LI>
-                        <LI className='links'
-                            onMouseEnter={() => setFocusMerchandise(true)}
-                            onMouseLeave={() => setFocusMerchandise(false)}
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            transition={{ duration: 0.08 }}
-                            onClick={closeModals}
-                            >
-                            {focusMerchandise ?
-                                <><A href='/avtc/#merchandisePeek'><span> - </span>MERCHANDISE<span> - </span></A></>
-                                : <A href='/avtc/#merchandisePeek'>MERCHANDISE</A>
-                            }
-                        </LI>
-                        <LI className='links'
-                            onMouseEnter={() => setFocusContactUs(true)}
-                            onMouseLeave={() => setFocusContactUs(false)}
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            transition={{ duration: 0.08 }}
-                            onClick={closeModals}
-                            >
-                            {focusContactUs ?
-                                <><A href='/avtc/#contactUs'><span> - </span>CONTACT US<span> - </span></A></>
-                                : <A href='/avtc/#contactUs'>CONTACT US</A>
-                            }
-                        </LI>
-                    </UL>
-                </Container>
-            : null}
+            <AnimatePresence>
+                {showMenu ?
+                    <Container
+                    variants={ItemContainerAnimation}
+                    transition={{ duration: .2 }}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    onClick={toggleMenu}
+                    onTap={toggleMenu}
+                    >
+                        <UL className='menu-links'>
+                            <LI className='links'
+                                onMouseEnter={() => setFocusHome(true)}
+                                onMouseLeave={() => setFocusHome(false)}
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                                transition={{ duration: 0.08 }}
+                                onClick={closeAndUnfocusTitles}
+                                >
+                                {focusHome ?
+                                    <><Link className='links' to='/'><span> - </span>HOME<span> - </span></Link></>
+                                    : <Link className='links' to='/'>HOME</Link>
+                                }
+                                {/* {focusHome ?
+                                    <><A href='/'><span> - </span>HOME<span> - </span></A></>
+                                    : <A href='/'>HOME</A>
+                                } */}
+                            </LI>
+                            <LI className='links'
+                                onMouseEnter={() => setFocusGallery(true)}
+                                onMouseLeave={() => setFocusGallery(false)}
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                                transition={{ duration: 0.08 }}
+                                onClick={closeAndUnfocusTitles}
+                                >
+                                {focusGallery ?
+                                    <><Link className='links' to='/gallery'><span> - </span>GALLERY<span> - </span></Link></>
+                                    : <Link className='links' to='/gallery'>GALLERY</Link>
+                                }
+                                {/* {focusGallery ?
+                                    <><A href='/gallery'><span> - </span>GALLERY<span> - </span></A></>
+                                    : <A href='/gallery'>GALLERY</A>
+                                } */}
+                            </LI>
+                            <LI className='links'
+                                onMouseEnter={() => setFocusResidentArtists(true)}
+                                onMouseLeave={() => setFocusResidentArtists(false)}
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                                transition={{ duration: 0.08 }}
+                                onClick={closeAndUnfocusTitles}
+                                >
+                                {focusResidentArtists ?
+                                    <><Link to='/#artistCards'><span> - </span>RESIDENT ARTISTS<span> - </span></Link></>
+                                    : <Link to='/#artistCards'>RESIDENT ARTISTS</Link>
+                                }
+                                {/* {focusResidentArtists ?
+                                    <><A href='/#artistCards'><span> - </span>RESIDENT ARTISTS<span> - </span></A></>
+                                    : <A href='/#artistCards'>RESIDENT ARTISTS</A>
+                                } */}
+                            </LI>
+                            <LI className='links'
+                                onMouseEnter={() => setFocusMerchandise(true)}
+                                onMouseLeave={() => setFocusMerchandise(false)}
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                                transition={{ duration: 0.08 }}
+                                onClick={closeAndUnfocusTitles}
+                                >
+                                {focusMerchandise ?
+                                    <><Link to='/#merchandisePeek'><span> - </span>MERCHANDISE<span> - </span></Link></>
+                                    : <Link to='/#merchandisePeek'>MERCHANDISE</Link>
+                                }
+                
+                                {/* {focusMerchandise ?
+                                    <><A href='/#merchandisePeek'><span> - </span>MERCHANDISE<span> - </span></A></>
+                                    : <A href='/#merchandisePeek'>MERCHANDISE</A>
+                                } */}
+                            </LI>
+                            <LI className='links'
+                                onMouseEnter={() => setFocusContactUs(true)}
+                                onMouseLeave={() => setFocusContactUs(false)}
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                                transition={{ duration: 0.08 }}
+                                onClick={closeAndUnfocusTitles}
+                                >
+                                {focusContactUs ?
+                                    <><Link to='/#contactUs'><span> - </span>CONTACT US<span> - </span></Link></>
+                                    : <Link to='/#contactUs'>CONTACT US</Link>
+                                }
+                                {/* {focusContactUs ?
+                                    <><A href='/#contactUs'><span> - </span>CONTACT US<span> - </span></A></>
+                                    : <A href='/#contactUs'>CONTACT US</A>
+                                } */}
+                            </LI>
+                        </UL>
+                    </Container>
+                : null}
+            </AnimatePresence>
         </>
     )
 }
@@ -154,37 +218,37 @@ export default function MenuModal({ showMenu, setShowMenu, showPiece, setShowPie
 //     return (
 //         <nav>
 
-            // {/* <Link className='links' to='/avtc/'>
+            // {/* <Link className='links' to='/'>
             //     <h1 className='home-button'>HOME</h1>
             // </Link>
-            // <Link className='links' to='/avtc/gallery'>
+            // <Link className='links' to='/gallery'>
             //     <h1 className='gallery-button'>GALLERY</h1>
             // </Link>
-            // <Link className='links' to='/avtc/'>
+            // <Link className='links' to='/'>
             //     <h1 className='resident-artists-button'>RESIDENT ARTISTS</h1>
             // </Link>
-            // <Link className='links' to='/avtc/'>
+            // <Link className='links' to='/'>
             //     <h1 className='merchandise-button'>MERCHANDISE</h1>
             // </Link>
-            // <Link className='links' to='/avtc/'>
+            // <Link className='links' to='/'>
             //     <h1 className='contact-us-button'>CONTACT US</h1>
             // </Link> */}
 
 //             <ul className='menu-links'>
 //                 <li className='links'>
-//                     <a href='/avtc/'>HOME</a>
+//                     <a href='/'>HOME</a>
 //                 </li>
 //                 <li className='links'>
-//                     <a className='' href='/avtc/gallery'>GALLERY</a>
+//                     <a className='' href='/gallery'>GALLERY</a>
 //                 </li>
 //                 <li className='links'>
-//                     <a href='/avtc/#artistCards'>RESIDENT ARTISTS</a>
+//                     <a href='/#artistCards'>RESIDENT ARTISTS</a>
 //                 </li>
 //                 <li className='links'>
-//                     <a href='/avtc/#merchandisePeek'>MERCHANDISE</a>
+//                     <a href='/#merchandisePeek'>MERCHANDISE</a>
 //                 </li>
 //                 <li className='links'>
-//                     <a href='/avtc/#contactUs'>CONTACT US</a>
+//                     <a href='/#contactUs'>CONTACT US</a>
 //                 </li>
 //             </ul>
 //         </nav>

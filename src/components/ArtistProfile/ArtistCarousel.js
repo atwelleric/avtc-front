@@ -1,4 +1,4 @@
-import { useState, Component, useContext, useEffect, useRef } from 'react'
+import { useState, useContext, useEffect, useRef } from 'react'
 
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
@@ -192,7 +192,8 @@ export default function ArtistCarousel( props ) {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.9 }}
                                 transition={{ duration: 0.2 }}
-                                onClick={() => fetchPiece(i.slug)}
+                                // onClick={() => fetchPiece(i.slug)}
+                                onClick={console.log(i.slug)}
                                 >
                                 <Slider1Img src={i.art_image} alt={i.title} id={i.slug} />
                             </Slider1Container>

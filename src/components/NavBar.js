@@ -132,7 +132,7 @@ export default function NavBar() {
     }
     
 
-    //  //  //  PIECE SETTINGS  //  //  //
+    //  //  //  PIECEMODAL TOGGLE AND SETTINGS  //  //  //
 
     const { showPiece, setShowPiece } = useContext(PieceModalToggleContext)
 
@@ -157,23 +157,23 @@ export default function NavBar() {
             <Nav>
                 <NavContent>
                     <MenuButton id='menuToggleButton' role="button" aria-pressed="false" tabindex="0"
-                        whileHover={{ scale: 1.2 }}
-                        whileTap={{ scale: 0.9 }}
-                        transition={{ duration: 0.2 }}
-                        animate={animate} 
-                        onClick={toggleMenu}
-                        >
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{ duration: 0.2 }}
+                    animate={animate} 
+                    onClick={toggleMenu}
+                    >
                         <Button to={null}>
                             <MenuImg id='menuImage' src={menu} alt="menu"/>
                         </Button>
                     </MenuButton>
                     {/* <button onClick={() => setShowPiece(!showPiece)}>{showPiece ? 'close' : 'open'}</button> */}
                     <AVTCButton id='mainHomeButton' role="button" aria-pressed="false" tabindex="0"
-                        whileHover={{ scale: 1.2 }}
-                        whileTap={{ scale: 0.9 }}
-                        transition={{ duration: 0.2 }} 
-                        onClick={closeModals}
-                        >
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{ duration: 0.2 }} 
+                    onClick={closeModals}
+                    >
                         <Link className='links' to='/'>
                             <AVTCImg id='avtcImage' src={AVTC} alt="AVTC"/>
                         </Link>
@@ -181,13 +181,16 @@ export default function NavBar() {
                 </NavContent>
             </Nav>
             <MenuModal 
-                showMenu={showMenu}
-                setShowMenu={setShowMenu}
-                showPiece={showPiece}
-                setShowPiece={setShowPiece}
-                closeModals={closeModals}
-                />
-            <PieceModal />
+            showMenu={showMenu}
+            setShowMenu={setShowMenu}
+            showPiece={showPiece}
+            setShowPiece={setShowPiece}
+            closeModals={closeModals}
+            />
+            <PieceModal 
+            // showPiece={showPiece}
+            // setShowPiece={setShowPiece}
+            />
         </>
     )
 }
