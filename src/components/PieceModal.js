@@ -1,10 +1,9 @@
 import { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 import { PieceContext, PieceModalToggleContext } from '../helperFunctions/avtcContext'
-import { DBURL } from '../helperFunctions/config'
 
 
 //  //  //  STYLED COMPONENTS   //  //  //
@@ -35,8 +34,8 @@ const SubContainer = styled(motion.div)`
 `
 
 const Img = styled(motion.img)`
-    max-width: 70vmin;
-    max-height: 70vmin;
+    max-width: 90vmin;
+    max-height: 90vmin;
     overflow: hidden;
 
     border-radius: 2vmin 2vmin 0 0;
@@ -47,9 +46,10 @@ const PieceTitle = styled(motion.h1)`
     font-size: 17px;
     letter-spacing: 1px;
 
-    padding: 2vmin 10vmin;
+    padding: 2vmin;
     margin: 0;
     margin-top: 5vmin;
+    max-width: 40vmin;
 
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 
@@ -65,6 +65,7 @@ const PieceArtist = styled(motion.h1)`
     padding: 2vmin 10vmin;
     margin: 0;
     margin-bottom: 5vmin;
+    max-width: 40vmin;
 
     -webkit-filter: drop-shadow(0px 2px 2px #000000);
     filter: drop-shadow(0px 2px 2px #000000);
@@ -74,18 +75,14 @@ const PieceArtist = styled(motion.h1)`
 
 //  //  //  VARIABLES   //  //  //
 
-const ItemContainerAnimation = {
+const MainContainerAnimation = {
     hidden: { opacity: 0 },
     visible: {
-        opacity: 1,
-        transition: {
-            delayChildren: 1
-        },
-        delay: .5
+        opacity: 1
     }
 };
   
-const ItemAnimation = {
+const PieceContainerAnimation = {
     hidden: { y: -50, opacity: 0 },
     visible: {
         y: 0,
@@ -96,7 +93,6 @@ const ItemAnimation = {
 
 //  //  //  FUNCTION    //  //  //
 
-
 export default function PieceModal() {
 
 
@@ -106,47 +102,50 @@ export default function PieceModal() {
     const { showPiece, setShowPiece } = useContext(PieceModalToggleContext)
 
 
-
     return (
         <>
-            {showPiece ?
-                <Container
-                    variants={ItemContainerAnimation}
+            <AnimatePresence>
+                {showPiece ?
+                    <Container
+                    variants={MainContainerAnimation}
                     transition={{ duration: .2 }}
                     initial="hidden"
                     animate="visible"
+                    exit="hidden"
                     onClick={() => setShowPiece(!showPiece)}
                     >
-                    <SubContainer 
-                        variants={ItemAnimation}
+                        <SubContainer
+                        variants={PieceContainerAnimation}
                         initial="hidden"
                         animate="visible"
+                        exit="hidden"
                         >
-                        <Img
+                            <Img
                             src={piece.img}
                             alt={piece.title}
                             // variants={ItemAnimation}
                             // transition={{ duration: 0.2 }}
                             />
-                        <PieceTitle
+                            <PieceTitle
                             // variants={ItemAnimation}
                             // transition={{ duration: 0.2 }}
                             >
-                            {piece.title}
-                        </PieceTitle>
-                        <Link key={piece.artistSlug} to={`/${piece.artistSlug}`}>
-                            <PieceArtist
+                                {piece.title}
+                            </PieceTitle>
+                            <Link key={piece.artistSlug} to={`/artists/${piece.artistSlug}`}>
+                                <PieceArtist
                                 // variants={ItemAnimation}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.9 }}
                                 transition={{ duration: 0.1 }}
                                 >
-                                    View {piece.artistName}'s Profile
-                            </PieceArtist>
-                        </Link>
-                    </SubContainer>
-                </Container>
-            : null}
+                                        View {piece.artistName}'s Profile
+                                </PieceArtist>
+                            </Link>
+                        </SubContainer>
+                    </Container>
+                : null}
+            </AnimatePresence>
         </>
     )
 }

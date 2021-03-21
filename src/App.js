@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext, useMemo } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 // import { Frame, Scroll, useCycle } from 'framer'
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
@@ -85,41 +85,37 @@ const BottomBGImg = styled(motion.img)`
 `
 
 
-
-//  //  //  COMPONENT    //  //  //
+//  //  //  FUNCTION    //  //  //
 
 export default function App() {
 
 
   //  //  //  PIECE MASTER SETTINGS  //  //  //
 
-  const [ piece, setPiece ] = useState('wazzap')
+  const [ piece, setPiece ] = useState(null)
   const providerPiece = useMemo (() =>  ({ piece, setPiece }), [ piece, setPiece ])
 
   const [ showPiece, setShowPiece ] = useState(false)
   const providerShowPiece = useMemo (() =>  ({ showPiece, setShowPiece }), [ showPiece, setShowPiece ])
 
 
+
+
   //  //  //  RENDER    //  //  //
 
   return (
     <div className="App">
-
-      <PieceContext.Provider value={ providerPiece }>
-        <PieceModalToggleContext.Provider value={ providerShowPiece }>
-
-        	<NavBar />
-        	<Switch>
-        	    <Route exact path='/avtc/' component={Home} />
-        	    <Route exact path='/avtc/gallery' component={Gallery} />
-        	    <Route exact path='/avtc/:artistSlug' component={ArtistProfile} />
-        	</Switch>
-
-        </PieceModalToggleContext.Provider>
-      </PieceContext.Provider>
-
-      <MainBGImg src={main_bg_img} />
-      {/* <BottomBGImg src={bottom_bg_img} /> */}
+        <PieceContext.Provider value={ providerPiece }>
+          <PieceModalToggleContext.Provider value={ providerShowPiece }>
+            <NavBar />
+            <Switch>
+                <Route exact path='/' component={Home} />
+                <Route exact path='/gallery' component={Gallery} />
+                <Route exact path='/artists/:artistSlug' component={ArtistProfile} />
+            </Switch>
+          </PieceModalToggleContext.Provider>
+        </PieceContext.Provider>
+        <MainBGImg src={main_bg_img} />
     </div>
   )
 }
