@@ -6,32 +6,27 @@ import styled from 'styled-components'
 import { PieceContext, PieceModalToggleContext } from '../../helperFunctions/avtcContext'
 import { DBURL } from '../../helperFunctions/config'
 
-import iconCalendar from '../../images/iconCalendar.png'
 
+//  //  //  STYLED-COMPONENTS   //  //  //
 
-//  //  //  STYLED COMPONENTS   //  //  //
-
-const Container = styled(motion.div)`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    display: grid;
-    justify-items: center;
-    align-items: center;
-    color: rgba(255, 255, 255, 0.7);
+const Margin = styled(motion.section)`
+    margin-top: 10vh;
 `
 
 const Section = styled.section`
     /* overflow: hidden; */
     padding: 0;
-    margin: 3vmin;
+    /* margin: 3vmin; */
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
 
     /* margin: 0;
 	padding: 0;
     -webkit-transform: translate(-50%, -50%);
     position: relative;
 	left: 50%;
-	top: 50%; */                                            ¸
+	top: 50%; */
 
 `
 
@@ -49,22 +44,22 @@ const ItemContainer = styled(motion.ul)`
     max-width: 1000px;
     /* max-height: 1000px; */
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(3, 30%);
     /* grid-template-rows: repeat(2, 1fr); */
 	/* grid-template-columns: repeat(auto-fill, minmax(26vmin, 1fr)); */
     justify-content: center;
     align-content: center;
     gap: 2vmin;
-    padding: 2vmin;
+    padding: 2vmin 0 2vmin 0;
     /* background: rgba(255, 255, 255, 0.07); */
-    background: pink;
+    /* background: pink; */
     /* background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.421), rgba(50, 50, 50, 0.421), rgba(255, 255, 255, 0.171), rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.171), rgba(50, 50, 50, 0.421), rgba(0, 0, 0, 0.421), rgba(0, 0, 0, 0)); */
     /* border-radius: 30px; */
     -webkit-filter: drop-shadow(0px 2px 2px #000000);
     filter: drop-shadow(0px 2px 2px #000000);
 
 
-	/* border-top: 1px solid rgba(255, 255, 255, 0.7); */
+	border-top: 1px solid rgba(255, 255, 255, 0.7);
 `
 
 const Item = styled(motion.li)`
@@ -74,10 +69,10 @@ const Item = styled(motion.li)`
     /* max-height: 333px; */
     /* background-color: rgba(0, 0, 0, 0.5); */
 
-    width: 90vmin;
-    height: 90vmin;
-    max-width: 900px ;
-    max-height: 900px ;
+    width: 30vmin;
+    height: 30vmin;
+    max-width: 300px ;
+    max-height: 300px ;
 
     overflow: hidden;
 `
@@ -87,14 +82,14 @@ const Img = styled(motion.img)`
 
     /* min-width: inherit;
     min-height: inherit; */
-    max-height: 90vmin;
+    max-height: 50vmin;
 
     margin: 0;
 	padding: 0;
-    -webkit-transform: translate(0%, -50%);
+    -webkit-transform: translate(-50%, -50%);
     position: relative;
-	/* left: 0%;
-	top: 50%; */
+	left: 50%;
+	top: 50%;
 
     object-fit: cover;
     -webkit-filter: grayscale(0%) opacity(100%);
@@ -132,54 +127,78 @@ const ItemAnimation = {
 };
 
 
+//  //  //  FUNCTION    //  //  //
+
 export default function ArtistCards() {
 
 
     //  //  //  DATA FETCHING FROM DB   //  //  //
   
-    useEffect(() => {fetchArtists()}, []);
+    useEffect(() => {fetchGallery()}, []);
 
-    const [ artists, setArtists ] = useState([]);
+    const [ gallery, setGallery ] = useState([]);
   
-    const fetchArtists = async () => {
+    const fetchGallery = async () => {
       
-      const rtstsData = await fetch(`${DBURL}/artists`)
-      const rtsts = await rtstsData.json();
+      const gallData = await fetch(`${DBURL}/gallery`)
+      const gall = await gallData.json();
 
-      setArtists(rtsts);
-    //   console.log(rtsts)
+      setGallery(gall);
       
     }
 
 
+    //  //  //  PIECE SETTINGS    //  //  //
+
+    const { setPiece } = useContext(PieceContext)
+    const { showPiece, setShowPiece } = useContext(PieceModalToggleContext)
+
+    const fetchPiece = async (i) => {
+      
+        const picData = await fetch(`${DBURL}/gallery/${i}`)
+        const pic = await picData.json();
+
+        setPiece(
+            {
+                title: pic.title,
+                slug: pic.slug,
+                img: pic.art_image,
+                artistSlug: pic.artist_id,
+                artistName: pic.artist_name
+            }
+        )
+
+        setShowPiece(!showPiece)
+
+    }
+
+
     //  //  //  FUNCTIONS    //  //  //
-    
+
     return (
         <>
-            <Container>
-                <PageTitle>Resident Artists</PageTitle>
-                <Section>
-                    <ItemContainer
-                        variants={ItemContainerAnimation}
-                        initial="hidden"
-                        animate="visible"
-                        >
-                            {/* {artists.map((i) => (
-                                <Link key={i.slug} to={`/${i.slug}`}>
-                                    <Item
-                                        variants={ItemAnimation}
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.9 }}
-                                        transition={{ duration: 0.2 }}
-                                        >
-                                            <Img src={i.profile_image} alt={i.profile_image} id={i.slug} />
-                                            <h1>{i.name}</h1>
-                                    </Item>
-                                </Link>
-                            ))} */}
-                    </ItemContainer>
-                </Section>
-            </Container>
+            <Margin />
+            <PageTitle>Our Work</PageTitle>
+            <Section>
+                <ItemContainer
+                    variants={ItemContainerAnimation}
+                    initial="hidden"
+                    animate="visible"
+                    >
+                        {gallery.map((i) => (
+                            <Item
+                                key={i.slug}
+                                variants={ItemAnimation}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.9 }}
+                                transition={{ duration: 0.2 }}
+                                onClick={() => fetchPiece(i.slug)}
+                                >
+                                    <Img src={i.art_image} alt={i.title} id={i.slug} />
+                            </Item>
+                        ))}
+                </ItemContainer>
+            </Section>
         </>
     )
 }
