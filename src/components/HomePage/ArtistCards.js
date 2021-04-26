@@ -27,7 +27,6 @@ const Section = styled.section`
     position: relative;
 	left: 50%;
 	top: 50%; */
-
 `
 
 const ItemContainer = styled(motion.ul)`
@@ -71,8 +70,8 @@ const Item = styled(motion.li)`
 
     width: 30vmin;
     height: 30vmin;
-    max-width: 300px ;
-    max-height: 300px ;
+    max-width: 300px;
+    max-height: 300px;
 
     overflow: hidden;
 `
