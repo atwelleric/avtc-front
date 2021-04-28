@@ -122,7 +122,7 @@ export default function Services() {
                             <Item
                                 key={i[0]}
                                 variants={ItemAnimation}
-                                whileHover={{ scale: 1.05 }}
+                                // whileHover={{ scale: 1.05 }}
                                 >
                                 <Img src={i[0]} alt='tattooIcon' id='tattooIcon'/>
                                 <ItemTitle>{i[1]}</ItemTitle>
