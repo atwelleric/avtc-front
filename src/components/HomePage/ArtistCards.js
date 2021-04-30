@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { useCycle } from 'framer'
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
@@ -20,7 +21,9 @@ const Section = styled.section`
 
 const ItemContainer = styled(motion.ul)`
     
-    list-style: none;
+    
+    padding: 0;
+    list-style-type: none;
     margin-block-start: 0;
     margin-block-end: 0;
     margin-inline-start: 0;
@@ -28,29 +31,40 @@ const ItemContainer = styled(motion.ul)`
     padding-inline-start: 0;
 
     width: 100vmin;
-    height: 90.009vmin;
+    /* height: 90.009vmin; */
     max-width: 1000px;
-    max-height: 1000px;
+    /* max-height: 1000px; */
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 30%);
     /* grid-template-rows: repeat(2, 1fr); */
 	/* grid-template-columns: repeat(auto-fill, minmax(26vmin, 1fr)); */
-    justify-items: stretch;
-    gap: 2vmin;
-    padding: 2vmin;
-    background: rgba(255, 255, 255, 0.07);
+    justify-content: center;
+    align-content: center;
+    grid-gap: 1vmin;
+    /* padding: 2vmin 0 2vmin 0; */
+    /* background: rgba(255, 255, 255, 0.07); */
+    /* background: pink; */
     /* background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.421), rgba(50, 50, 50, 0.421), rgba(255, 255, 255, 0.171), rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.171), rgba(50, 50, 50, 0.421), rgba(0, 0, 0, 0.421), rgba(0, 0, 0, 0)); */
     /* border-radius: 30px; */
     -webkit-filter: drop-shadow(0px 2px 2px #000000);
     filter: drop-shadow(0px 2px 2px #000000);
+
+
+	border-top: 1px solid rgba(255, 255, 255, 0.7);
 `
 
 const Item = styled(motion.li)`
     /* width: 25.14433811802233vmin; */
-    /* max-width: 315.31px; */
+    /* max-width: 333px; */
     /* width: 25.14433811802233vmin; */
-    /* max-height: 315.31px; */
-    background-color: rgba(0, 0, 0, 0.5);
+    /* max-height: 333px; */
+    /* background-color: rgba(0, 0, 0, 0.5); */
+
+    width: 30vmin;
+    height: 30vmin;
+    max-width: 300px ;
+    max-height: 300px ;
+
     overflow: hidden;
 `
 
@@ -62,16 +76,17 @@ const Img = styled(motion.img)`
     max-height: 45vmin;
 
     margin: 0;
-	padding: 0;
-    -webkit-transform: translate(-50%, -50%);
-    position: relative;
-	left: 50%;
-	top: 50%;
+    padding: 0;
+    /* transform: translate(0%, 0%); */
+    /* position: relative; */
+    left: 50%;
+    top: 0%;
 
     object-fit: cover;
     -webkit-filter: grayscale(0%);
     filter: grayscale(0%);
 `
+
 
 const ItemTitle = styled.h1`
     font-size: 15px;
@@ -175,14 +190,19 @@ export default function ArtistsPeek() {
                                 <Item
                                     key={i.slug}
                                     variants={ItemAnimation}
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.9 }}
-                                    transition={{ duration: 0.2 }}
                                     >
                                         <Link className='links' to={`/artists/${i.slug}`}>
-                                            {/* <Img src={i.profile_image} alt={i.name} id={i.slug} /> */}
+                                            <Img 
+                                                src={i.profile_image}
+                                                alt={i.name}
+                                                id={i.slug}
+                                                
+                                                whileHover={{ scale: 1.05 }}
+                                                whileTap={{ scale: 0.9 }}
+                                                transition={{ duration: 0.2 }}
+                                            />
                                         </Link>
-                                        <h1>{i.name}</h1>
+                                        {/* <h1>{i.name}</h1> */}
 
                                 </Item>
                         ))}
