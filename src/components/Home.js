@@ -68,6 +68,10 @@ const BottomBGImg = styled(motion.img)`
 export default function Home() {
   return (
     <>
+      <head>
+        <script src="pace.min.js"></script>
+        <link rel="stylesheet" href="pace-theme-default.min.css" />
+      </head>
       <HomePageSection>
         <HomeHeader>
           <HomeHeaderImg
